@@ -35,6 +35,11 @@
 </head>
 
 <body>
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress-container">
+        <div class="scroll-progress" id="progress-bar"></div>
+    </div>
+
     <!-- Preloader -->
     <div id="preloader">
         <div class="loader-content">
@@ -99,7 +104,7 @@
                     <a href="#about" class="active">DashBoard</a>
                 </nav>
                 <div class="actions">
-                    <i class="fas fa-search"></i>
+                    <i class="fas fa-search" id="search-trigger"></i>
                     <div class="theme-toggle">
                         <img id="theme-icon" src="moon.png" alt="Theme Toggle" width="20" height="20">
                     </div>
@@ -114,35 +119,35 @@
             <section id="projects">
                 <h2>Projects</h2>
                 <div class="project-grid">
-                    <div class="video-card">
+                    <div class="video-card" data-title="Whelming.">
                         <iframe width="560" height="315"
                             src="https://www.youtube.com/embed/iWr1nApKbhc?si=NRrfqsQLaVtLljOV"
                             title="YouTube video player" frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                             referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                     </div>
-                    <div class="video-card">
+                    <div class="video-card" data-title="Entrance. (side b)">
                         <iframe width="560" height="315"
                             src="https://www.youtube.com/embed/H8WismzmucM?si=Cju_3yFjHXxKIVtI"
                             title="YouTube video player" frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                             referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                     </div>
-                    <div class="video-card">
+                    <div class="video-card" data-title="Entrance. (side a)">
                         <iframe width="560" height="315"
                             src="https://www.youtube.com/embed/60NgjyN1CpU?si=dd8XMLK2h0Ejrrf1"
                             title="YouTube video player" frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                             referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                     </div>
-                    <div class="video-card">
+                    <div class="video-card" data-title="Sustainment.">
                         <iframe width="560" height="315"
                             src="https://www.youtube.com/embed/XQxIrALF79s?si=Y1SonBoWir6Ed_6P"
                             title="YouTube video player" frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                             referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                     </div>
-                    <div class="video-card">
+                    <div class="video-card" data-title="Serenity.">
                         <iframe width="560" height="315"
                             src="https://www.youtube.com/embed/ikBKo8DqiFo?si=3hEqMtKTXHbFwS69"
                             title="YouTube video player" frameborder="0"
@@ -162,6 +167,19 @@
     <footer style="text-align: center; padding: 2rem 1rem; color: var(--text-color); opacity: 0.7; font-size: 0.9rem;">
         <p>© 2026 CashewNuts</p>
     </footer>
+
+    <!-- Search Modal -->
+    <div id="search-modal" class="search-modal">
+        <div class="search-modal-content">
+            <span class="close-search">&times;</span>
+            <div class="search-input-wrapper">
+                <i class="fas fa-search search-icon-inner"></i>
+                <input type="text" id="music-search-input" placeholder="Type music name (e.g. Whelming.)"
+                    autocomplete="off">
+            </div>
+            <p class="search-hint">Only music names from the "Latest Work" list are allowed.</p>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>

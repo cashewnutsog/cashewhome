@@ -145,9 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const emailText = emailContainer.querySelector('span').innerText;
             navigator.clipboard.writeText(emailText).then(() => {
-                console.log('Email copied to clipboard:', emailText);
                 emailContainer.innerHTML = '<i class="fas fa-check" style="color: #2ecc71;"></i> <span>Copied!</span>';
-
                 setTimeout(() => {
                     emailContainer.innerHTML = originalContent;
                     isCopying = false;
@@ -159,4 +157,96 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+
+    // Scroll Progress Logic
+    const progressBar = document.getElementById('progress-bar');
+    const contentArea = document.querySelector('.content');
+
+    if (progressBar && contentArea) {
+        contentArea.addEventListener('scroll', () => {
+            const winScroll = contentArea.scrollTop;
+            const height = contentArea.scrollHeight - contentArea.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            progressBar.style.width = scrolled + "%";
+        });
+    }
+
+    // 3D Tilt Effect for Video Cards
+    const cards = document.querySelectorAll('.video-card');
+    cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const rotateX = (y - centerY) / 10;
+            const rotateY = (centerX - x) / 10;
+
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+        });
+    });
+
+    // Music Search Logic
+    const searchTrigger = document.getElementById('search-trigger');
+    const searchModal = document.getElementById('search-modal');
+    const searchInput = document.getElementById('music-search-input');
+    const closeSearch = document.querySelector('.close-search');
+
+    if (searchTrigger && searchModal && searchInput && closeSearch) {
+        // Open search
+        searchTrigger.addEventListener('click', () => {
+            searchModal.classList.add('active');
+            setTimeout(() => searchInput.focus(), 100);
+        });
+
+        // Close search
+        const closeModal = () => {
+            searchModal.classList.remove('active');
+            searchInput.value = '';
+        };
+
+        closeSearch.addEventListener('click', closeModal);
+        window.addEventListener('click', (e) => {
+            if (e.target === searchModal) closeModal();
+        });
+
+        // Handle Search Input
+        searchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const query = searchInput.value.trim().toLowerCase();
+                let foundMatch = false;
+
+                cards.forEach(card => {
+                    const title = card.getAttribute('data-title').toLowerCase();
+                    if (title.includes(query) && query.length > 0) {
+                        foundMatch = true;
+                        closeModal();
+
+                        // Scroll to the card
+                        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                        // Apply glow effect
+                        card.classList.add('glow-effect');
+
+                        // Remove glow after 3 seconds
+                        setTimeout(() => {
+                            card.classList.remove('glow-effect');
+                        }, 3000);
+                    }
+                });
+
+                if (!foundMatch && query.length > 0) {
+                    searchInput.style.borderColor = '#ff4b2b';
+                    setTimeout(() => searchInput.style.borderColor = 'rgba(255, 255, 255, 0.1)', 1000);
+                }
+            }
+        });
+    }
 });
