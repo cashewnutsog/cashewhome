@@ -4,13 +4,34 @@ document.addEventListener('DOMContentLoaded', () => {
     const container = document.querySelector('.container');
     const bgVideo = document.getElementById('bg-video');
 
-    // Wait for all critical resources to load
-    window.addEventListener('load', () => {
-        // Minimum display time for preloader (aesthetic purposes)
+    // Start loading video immediately
+    let videoReady = Promise.resolve();
+    if (bgVideo) {
+        const source = bgVideo.querySelector('source');
+        if (source && source.dataset.src) {
+            source.src = source.dataset.src;
+            bgVideo.load();
+        }
+
+        videoReady = new Promise((resolve) => {
+            bgVideo.oncanplaythrough = resolve;
+            // Fallback in case canplaythrough doesn't fire or video is already cached
+            if (bgVideo.readyState >= 3) resolve();
+            setTimeout(resolve, 5000); // Max 5s wait for video
+        });
+    }
+
+    const windowLoad = new Promise((resolve) => {
+        if (document.readyState === 'complete') resolve();
+        else window.addEventListener('load', resolve);
+    });
+
+    // Wait for both resources (window and video)
+    Promise.all([windowLoad, videoReady]).then(() => {
+        // Minimal delay for visual smoothness
         setTimeout(() => {
             preloader.classList.add('fade-out');
 
-            // Remove preloader from DOM after fade
             setTimeout(() => {
                 preloader.style.display = 'none';
                 container.classList.add('loaded');
@@ -18,22 +39,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Trigger staggered animations
                 initializeAnimations();
 
-                // Load and start background video AFTER components have loaded (delayed)
-                setTimeout(() => {
-                    if (bgVideo) {
-                        // Load the video source
-                        const source = bgVideo.querySelector('source');
-                        if (source && source.dataset.src) {
-                            source.src = source.dataset.src;
-                            bgVideo.load(); // Load the video
-                            bgVideo.play().catch(err => console.log('Video autoplay prevented:', err)); // Start playing
-                        }
-                        // Show the video
-                        bgVideo.classList.add('show');
-                    }
-                }, 1000); // Video loads and plays 1s after page components
+                // Show and play video immediately from start
+                if (bgVideo) {
+                    bgVideo.currentTime = 0;
+                    bgVideo.play().catch(err => console.log('Video play prevented:', err));
+                    bgVideo.classList.add('show');
+                }
             }, 600);
-        }, 500); // Show preloader for at least 500ms
+        }, 300);
     });
 
     // Initialize staggered animations
@@ -145,4 +158,5 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
 });
