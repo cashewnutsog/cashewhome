@@ -232,6 +232,21 @@ body {
     perspective: 1000px;
 }
 
+#bg-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #0d0d0d;
+    z-index: -2;
+    transition: background-color 0.3s;
+}
+
+body.light-theme #bg-backdrop {
+    background-color: #f8f9fa;
+}
+
 #bg-video {
     position: fixed;
     top: 50%;
