@@ -213,23 +213,34 @@
 }
 
 html {
-    background-color: transparent !important;
+    background-color: #0d0d0d !important;
+    /* Match dark theme bg */
+    overflow-x: hidden;
 }
 
 html.light-theme-base {
-    background-color: transparent !important;
+    background-color: #f8f9fa !important;
+    /* Match light theme bg */
 }
 
 body {
-    background-color: transparent !important;
+    background-color: #0d0d0d !important;
+    /* Match dark theme bg */
     color: var(--text-color);
     font-family: var(--font-main);
     line-height: 1.6;
     height: 100vh;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: none;
+    /* Prevent bounce effect */
     transition: background-color 0.3s, color 0.3s;
     position: relative;
     perspective: 1000px;
+}
+
+body.light-theme {
+    background-color: #f8f9fa !important;
 }
 
 #bg-backdrop {
