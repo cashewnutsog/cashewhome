@@ -660,7 +660,7 @@ a {
 }
 
 .latest-work-list li:hover {
-    color: var(--text-heading);
+    color: #ffffff;
 }
 
 .chart-placeholder {
