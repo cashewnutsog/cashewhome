@@ -28,25 +28,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Wait for both resources (window and video)
     Promise.all([windowLoad, videoReady]).then(() => {
-        // Minimal delay for visual smoothness
+        // Delay to ensure one render cycle and visibility on mobile
         setTimeout(() => {
-            preloader.classList.add('fade-out');
+            // Use requestAnimationFrame to ensure painting has occurred
+            requestAnimationFrame(() => {
+                preloader.classList.add('fade-out');
 
-            setTimeout(() => {
-                preloader.style.display = 'none';
-                container.classList.add('loaded');
+                // Wait for CSS transition (0.6s) to finish before removing
+                setTimeout(() => {
+                    preloader.remove(); // Remove from DOM entirely
+                    container.classList.add('loaded');
 
-                // Trigger staggered animations
-                initializeAnimations();
+                    // Trigger staggered animations
+                    initializeAnimations();
 
-                // Show and play video immediately from start
-                if (bgVideo) {
-                    bgVideo.currentTime = 0;
-                    bgVideo.play().catch(err => console.log('Video play prevented:', err));
-                    bgVideo.classList.add('show');
-                }
-            }, 600);
-        }, 300);
+                    // Show and play video immediately from start
+                    if (bgVideo) {
+                        bgVideo.currentTime = 0;
+                        bgVideo.play().catch(err => console.log('Video play prevented:', err));
+                        bgVideo.classList.add('show');
+                    }
+                }, 600);
+            });
+        }, 500); // 500ms delay for visibility
     });
 
     // Initialize staggered animations
