@@ -231,7 +231,7 @@ body {
     line-height: 1.6;
     height: 100vh;
     overflow-x: hidden;
-    overflow-y: auto;
+    overflow-y: hidden;
     overscroll-behavior: none;
     /* Prevent bounce effect */
     transition: background-color 0.3s, color 0.3s;
@@ -632,8 +632,10 @@ a {
 
 .skills-section h2,
 .latest-work-section h2 {
-    font-size: 1.6rem;
-    font-weight: 300;
+    font-size: 1.4rem;
+    /* Slightly reduced from 1.6rem */
+    font-weight: 400;
+    /* Regular weight instead of light for better readability but smaller size */
     margin-bottom: 1rem;
     color: var(--text-color);
     border-bottom: 1px solid var(--border-color);
@@ -752,9 +754,11 @@ section {
 }
 
 section h2 {
-    font-size: 2.2rem;
+    font-size: 2rem;
+    /* Reduced from 2.2rem */
     margin-bottom: 1.5rem;
-    color: var(--text-heading);
+    color: var(--text-color);
+    /* Ensure solid color */
     font-weight: 300;
 }
 
@@ -983,8 +987,24 @@ section>p {
     }
 
     /* Mobile Video Enhancement */
+    /* Mobile Video Enhancement & Perf */
     .video-card::before {
-        opacity: 1;
-        /* Always visible on mobile */
+        display: none;
+        /* Remove rotating gradient border on mobile for perf */
+    }
+
+    .video-card {
+        box-shadow: none;
+        /* Simplify shadow */
+        background: rgba(255, 255, 255, 0.08);
+        /* Slightly more visible bg since border is gone */
+    }
+
+    /* Reduce glassmorphism cost on mobile */
+    .sidebar,
+    .content {
+        backdrop-filter: blur(5px);
+        /* Reduced blur radius from 12px */
+        -webkit-backdrop-filter: blur(5px);
     }
 }

@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Wait for both resources (window and video)
+    // Wait for both resources (window and video)
     Promise.all([windowLoad, videoReady]).then(() => {
         // Delay to ensure one render cycle and visibility on mobile
         setTimeout(() => {
@@ -34,23 +35,39 @@ document.addEventListener('DOMContentLoaded', () => {
             requestAnimationFrame(() => {
                 preloader.classList.add('fade-out');
 
-                // Wait for CSS transition (0.6s) to finish before removing
+                // Wait for CSS transition (0.6s) to finish before removing preloader
                 setTimeout(() => {
-                    preloader.remove(); // Remove from DOM entirely
+                    preloader.remove();
+
+                    // Stage 1: Fade in main container
                     container.classList.add('loaded');
 
-                    // Trigger staggered animations
-                    initializeAnimations();
+                    // Stage 2: Trigger internal content animations after a short delay
+                    setTimeout(() => {
+                        initializeAnimations();
+                    }, 200);
 
-                    // Show and play video immediately from start
+                    // Stage 3: Show video background last to avoid fighting for bandwidth/focus
                     if (bgVideo) {
-                        bgVideo.currentTime = 0;
-                        bgVideo.play().catch(err => console.log('Video play prevented:', err));
-                        bgVideo.classList.add('show');
+                        setTimeout(() => {
+                            bgVideo.currentTime = 0;
+                            // Attempt play
+                            const playPromise = bgVideo.play();
+                            if (playPromise !== undefined) {
+                                playPromise.then(() => {
+                                    bgVideo.classList.add('show');
+                                }).catch(err => {
+                                    console.log('Video play prevented:', err);
+                                    // Even if autoplay fails (low power mode), show the video frame if possible
+                                    bgVideo.classList.add('show');
+                                });
+                            }
+                        }, 500); // 500ms delay after content starts appearing
                     }
+
                 }, 600);
             });
-        }, 500); // 500ms delay for visibility
+        }, 500);
     });
 
     // Initialize staggered animations
