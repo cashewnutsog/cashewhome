@@ -270,4 +270,29 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+    // Initialize Lenis for Smooth Scrolling
+    if (typeof Lenis !== 'undefined') {
+        const content = document.querySelector('.content');
+        if (content) {
+            const lenis = new Lenis({
+                wrapper: content, // The element that scrolls
+                content: content, // The element containing the content
+                duration: 1.2,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                orientation: 'vertical',
+                gestureOrientation: 'vertical',
+                smoothWheel: true,
+                wheelMultiplier: 1,
+                smoothTouch: false,
+                touchMultiplier: 2,
+            });
+
+            function raf(time) {
+                lenis.raf(time);
+                requestAnimationFrame(raf);
+            }
+
+            requestAnimationFrame(raf);
+        }
+    }
 });
