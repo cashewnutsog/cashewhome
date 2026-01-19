@@ -307,7 +307,6 @@ document.addEventListener('DOMContentLoaded', () => {
             "Mom is watching...",
             "Viral in 2050",
             "Stonks 📉",
-            "Error 404: Audience",
             "Just you and me",
             "Refreshing...",
             "Algorithms hate this",
