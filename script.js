@@ -381,21 +381,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     updateSarcasticStats();
-
-    // Glitch Poster Interaction
-    const glitchPoster = document.querySelector('.glitch-poster');
-    if (glitchPoster) {
-        glitchPoster.addEventListener('click', () => {
-            glitchPoster.classList.add('glitch-active');
-
-            // Play a glitch sound if desired (optional placeholder)
-            // const audio = new Audio('glitch-sound.mp3');
-            // audio.play().catch(e => console.log('Audio play failed', e));
-
-            // Remove class after animation completes to allow re-triggering
-            setTimeout(() => {
-                glitchPoster.classList.remove('glitch-active');
-            }, 500); // 0.2s + 0.3s approx animation time, giving it a bit extra
-        });
-    }
 });
