@@ -304,7 +304,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const API_KEY = 'AIzaSyAQe2ZCyWJsR2vU6ExMOZNeOImXlN3LoYY';
         const CHANNEL_ID = 'UCoFnJVSRPCkEOvkWhV7Iqhg';
 
-        if (!viewerCount || !caption) return;
+        // Ensure all elements exist
+        if (!viewerCount || !caption || !subscriberCount) {
+            console.error("Stats elements missing!");
+            return;
+        }
 
         const sarcasticCaptions = [
             "Mom is watching...",
@@ -319,17 +323,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 1. Fetch Real Subscriber Count
         async function fetchRealStats() {
-            if (!subscriberCount) return;
             try {
+                console.log("Fetching YouTube Stats...");
                 const response = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${CHANNEL_ID}&key=${API_KEY}`);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
                 const data = await response.json();
+                console.log("YouTube API Data:", data);
+
                 if (data.items && data.items.length > 0) {
                     const realSubs = data.items[0].statistics.subscriberCount;
                     subscriberCount.innerText = parseInt(realSubs).toLocaleString();
+                } else {
+                    console.warn("No channel data found.");
+                    subscriberCount.innerText = "N/A";
                 }
             } catch (error) {
-                console.error('Failed to fetch YouTube stats', error);
-                subscriberCount.innerText = "Error";
+                console.error('Failed to fetch YouTube stats:', error);
+                // Visual feedback for error
+                subscriberCount.innerText = "Err";
+                subscriberCount.title = "Check console for details";
             }
         }
 
