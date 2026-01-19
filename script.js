@@ -296,10 +296,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Sarcastic Live Stats Logic
+    // Real Live Stats Logic
     function updateSarcasticStats() {
         const viewerCount = document.getElementById('live-viewers');
+        const subscriberCount = document.getElementById('live-subscribers');
         const caption = document.getElementById('sarcastic-caption');
+        const API_KEY = 'AIzaSyAQe2ZCyWJsR2vU6ExMOZNeOImXlN3LoYY';
+        const CHANNEL_ID = 'UCoFnJVSRPCkEOvkWhV7Iqhg';
 
         if (!viewerCount || !caption) return;
 
@@ -314,6 +317,27 @@ document.addEventListener('DOMContentLoaded', () => {
             "Waiting for a miracle"
         ];
 
+        // 1. Fetch Real Subscriber Count
+        async function fetchRealStats() {
+            if (!subscriberCount) return;
+            try {
+                const response = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${CHANNEL_ID}&key=${API_KEY}`);
+                const data = await response.json();
+                if (data.items && data.items.length > 0) {
+                    const realSubs = data.items[0].statistics.subscriberCount;
+                    subscriberCount.innerText = parseInt(realSubs).toLocaleString();
+                }
+            } catch (error) {
+                console.error('Failed to fetch YouTube stats', error);
+                subscriberCount.innerText = "Error";
+            }
+        }
+
+        // Fetch immediately and then every minute
+        fetchRealStats();
+        setInterval(fetchRealStats, 60000);
+
+        // 2. Simulated Live Viewers (Still fake as API doesn't give realtime concurrent viewers for channel pages)
         // Update Viewers (Random 1-3) with glitch chance
         setInterval(() => {
             const isGlitch = Math.random() < 0.05; // 5% chance
