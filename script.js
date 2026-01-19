@@ -315,7 +315,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const sarcasticCaptions = [
             "Mom is watching...",
             "Viral in 2050",
-            "Stonks 📉",
             "Just you and me",
             "Refreshing...",
             "Algorithms hate this",
@@ -327,7 +326,7 @@ document.addEventListener('DOMContentLoaded', () => {
         async function fetchRealStats() {
             try {
                 console.log("Fetching YouTube Stats...");
-                const response = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${CHANNEL_ID}&key=${API_KEY}`);
+                const response = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${CHANNEL_ID}&key=${API_KEY}&t=${Date.now()}`);
 
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
@@ -360,6 +359,16 @@ document.addEventListener('DOMContentLoaded', () => {
         // Fetch immediately and then every minute
         fetchRealStats();
         setInterval(fetchRealStats, 60000);
+
+        // Manual Refresh
+        const refreshBtn = document.getElementById('refresh-stats');
+        if (refreshBtn) {
+            refreshBtn.addEventListener('click', () => {
+                refreshBtn.style.transform = 'rotate(360deg)';
+                fetchRealStats();
+                setTimeout(() => { refreshBtn.style.transform = 'rotate(0deg)'; }, 500);
+            });
+        }
 
         // 2. Simulated Live Viewers (Still fake as API doesn't give realtime concurrent viewers for channel pages)
         // Update Viewers (Random 1-3) with glitch chance
