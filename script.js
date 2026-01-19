@@ -295,4 +295,51 @@ document.addEventListener('DOMContentLoaded', () => {
             requestAnimationFrame(raf);
         }
     }
+
+    // Sarcastic Live Stats Logic
+    function updateSarcasticStats() {
+        const viewerCount = document.getElementById('live-viewers');
+        const caption = document.getElementById('sarcastic-caption');
+
+        if (!viewerCount || !caption) return;
+
+        const sarcasticCaptions = [
+            "Mom is watching...",
+            "Viral in 2050",
+            "Stonks 📉",
+            "Error 404: Audience",
+            "Just you and me",
+            "Refreshing...",
+            "Algorithms hate this",
+            "Bot traffic only",
+            "Waiting for a miracle"
+        ];
+
+        // Update Viewers (Random 1-3) with glitch chance
+        setInterval(() => {
+            const isGlitch = Math.random() < 0.05; // 5% chance
+            if (isGlitch) {
+                viewerCount.innerText = "14,023";
+                viewerCount.style.color = "#e74c3c"; // Red for glitch
+                setTimeout(() => {
+                    viewerCount.innerText = Math.floor(Math.random() * 3) + 1;
+                    viewerCount.style.color = "#ffffff";
+                }, 150);
+            } else {
+                viewerCount.innerText = Math.floor(Math.random() * 3) + 1;
+            }
+        }, 3000);
+
+        // Update Caption (every 5s)
+        setInterval(() => {
+            const randomCaption = sarcasticCaptions[Math.floor(Math.random() * sarcasticCaptions.length)];
+            caption.style.opacity = 0;
+            setTimeout(() => {
+                caption.innerText = randomCaption;
+                caption.style.opacity = 1;
+            }, 500);
+        }, 5000);
+    }
+
+    updateSarcasticStats();
 });
