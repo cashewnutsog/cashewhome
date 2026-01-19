@@ -684,9 +684,12 @@ a {
 }
 
 .stat-row {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    /* Force separation */
     margin-bottom: 0.8rem;
+    width: 100%;
 }
 
 .stat-item {
