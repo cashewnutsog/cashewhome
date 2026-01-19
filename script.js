@@ -276,7 +276,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (content) {
             const lenis = new Lenis({
                 wrapper: content, // The element that scrolls
-                content: content, // The element containing the content
+                // content: content, // REMOVED: Do not set content to the same element as wrapper
                 duration: 1.2,
                 easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
                 orientation: 'vertical',

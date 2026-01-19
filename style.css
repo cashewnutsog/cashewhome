@@ -467,7 +467,7 @@ a {
     flex: 1;
     padding: 2rem;
     overflow-y: auto;
-    scroll-behavior: smooth;
+    /* scroll-behavior: smooth; - Removed to prevent conflict with Lenis */
     position: relative;
     background-color: var(--bg-color);
     backdrop-filter: blur(12px) saturate(160%);
