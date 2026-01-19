@@ -300,12 +300,14 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateSarcasticStats() {
         const viewerCount = document.getElementById('live-viewers');
         const subscriberCount = document.getElementById('live-subscribers');
+        const viewCount = document.getElementById('live-views');
+        const videoCount = document.getElementById('live-videos');
         const caption = document.getElementById('sarcastic-caption');
         const API_KEY = 'AIzaSyAQe2ZCyWJsR2vU6ExMOZNeOImXlN3LoYY';
         const CHANNEL_ID = 'UCoFnJVSRPCkEOvkWhV7Iqhg';
 
         // Ensure all elements exist
-        if (!viewerCount || !caption || !subscriberCount) {
+        if (!viewerCount || !caption || !subscriberCount || !viewCount || !videoCount) {
             console.error("Stats elements missing!");
             return;
         }
@@ -335,16 +337,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.log("YouTube API Data:", data);
 
                 if (data.items && data.items.length > 0) {
-                    const realSubs = data.items[0].statistics.subscriberCount;
-                    subscriberCount.innerText = parseInt(realSubs).toLocaleString();
+                    const stats = data.items[0].statistics;
+                    subscriberCount.innerText = parseInt(stats.subscriberCount).toLocaleString();
+                    viewCount.innerText = parseInt(stats.viewCount).toLocaleString();
+                    videoCount.innerText = parseInt(stats.videoCount).toLocaleString();
                 } else {
                     console.warn("No channel data found.");
                     subscriberCount.innerText = "N/A";
+                    viewCount.innerText = "N/A";
+                    videoCount.innerText = "N/A";
                 }
             } catch (error) {
                 console.error('Failed to fetch YouTube stats:', error);
                 // Visual feedback for error
                 subscriberCount.innerText = "Err";
+                viewCount.innerText = "Err";
+                videoCount.innerText = "Err";
                 subscriberCount.title = "Check console for details";
             }
         }
