@@ -850,8 +850,7 @@ nav {
     /* Bigger */
     font-weight: 800;
     /* Bolder */
-    color: #ffffff;
-    /* White */
+    color: var(--text-color);
     line-height: 1;
 }
 
