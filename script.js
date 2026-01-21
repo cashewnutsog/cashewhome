@@ -27,47 +27,47 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Wait for both resources (window and video)
-    // Wait for both resources (window and video)
     Promise.all([windowLoad, videoReady]).then(() => {
-        // Delay to ensure one render cycle and visibility on mobile
+        // Minimum time to show preloader (ensure it's visible on fast devices)
+        const minDisplayTime = window.innerWidth > 768 ? 500 : 1500;
+
         setTimeout(() => {
             // Use requestAnimationFrame to ensure painting has occurred
             requestAnimationFrame(() => {
-                preloader.classList.add('fade-out');
+                if (preloader) {
+                    preloader.classList.add('fade-out');
 
-                // Wait for CSS transition (0.6s) to finish before removing preloader
-                setTimeout(() => {
-                    preloader.remove();
-
-                    // Stage 1: Fade in main container
-                    container.classList.add('loaded');
-
-                    // Stage 2: Trigger internal content animations after a short delay
+                    // Wait for CSS transition (0.6s) to finish before removing preloader
                     setTimeout(() => {
-                        initializeAnimations();
-                    }, 200);
+                        preloader.remove();
 
-                    // Stage 3: Show video background last to avoid fighting for bandwidth/focus
-                    if (bgVideo) {
+                        // Stage 1: Fade in main container
+                        container.classList.add('loaded');
+
+                        // Stage 2: Trigger internal content animations after a short delay
                         setTimeout(() => {
-                            bgVideo.currentTime = 0;
-                            // Attempt play
-                            const playPromise = bgVideo.play();
-                            if (playPromise !== undefined) {
-                                playPromise.then(() => {
-                                    bgVideo.classList.add('show');
-                                }).catch(err => {
-                                    console.log('Video play prevented:', err);
-                                    // Even if autoplay fails (low power mode), show the video frame if possible
-                                    bgVideo.classList.add('show');
-                                });
-                            }
-                        }, 500); // 500ms delay after content starts appearing
-                    }
+                            initializeAnimations();
+                        }, 200);
 
-                }, 600);
+                        // Stage 3: Show video background last
+                        if (bgVideo) {
+                            setTimeout(() => {
+                                bgVideo.currentTime = 0;
+                                const playPromise = bgVideo.play();
+                                if (playPromise !== undefined) {
+                                    playPromise.then(() => {
+                                        bgVideo.classList.add('show');
+                                    }).catch(err => {
+                                        console.log('Video play prevented:', err);
+                                        bgVideo.classList.add('show');
+                                    });
+                                }
+                            }, 500);
+                        }
+                    }, 600);
+                }
             });
-        }, 500);
+        }, minDisplayTime);
     });
 
     // Initialize staggered animations
@@ -183,13 +183,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const progressBar = document.getElementById('progress-bar');
     const contentArea = document.querySelector('.content');
 
-    if (progressBar && contentArea) {
-        contentArea.addEventListener('scroll', () => {
-            const winScroll = contentArea.scrollTop;
-            const height = contentArea.scrollHeight - contentArea.clientHeight;
-            const scrolled = (winScroll / height) * 100;
+    const updateProgress = (scrollTop, scrollHeight, clientHeight) => {
+        const height = scrollHeight - clientHeight;
+        if (height > 0) {
+            const scrolled = (scrollTop / height) * 100;
             progressBar.style.width = scrolled + "%";
-        });
+        }
+    };
+
+    if (progressBar) {
+        const handleScroll = () => {
+            if (window.innerWidth > 768 && contentArea) {
+                updateProgress(contentArea.scrollTop, contentArea.scrollHeight, contentArea.clientHeight);
+            } else {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const scrollHeight = document.documentElement.scrollHeight;
+                const clientHeight = document.documentElement.clientHeight;
+                updateProgress(scrollTop, scrollHeight, clientHeight);
+            }
+        };
+
+        contentArea?.addEventListener('scroll', handleScroll);
+        window.addEventListener('scroll', handleScroll);
     }
 
     // 3D Tilt Effect for Video Cards
@@ -285,6 +300,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 wheelMultiplier: 1,
                 smoothTouch: false,
                 touchMultiplier: 2,
+                enabled: window.innerWidth > 768, // Disable Lenis on mobile
             });
 
             function raf(time) {
@@ -303,6 +319,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const viewCount = document.getElementById('live-views');
         const videoCount = document.getElementById('live-videos');
         const caption = document.getElementById('sarcastic-caption');
+        const API_KEY = 'AIzaSyAQe2ZCyWJsR2vU6ExMOZNeOImXlN3LoYY'; // IMPORTANT: RESTRICT THIS KEY IN GOOGLE CONSOLE TO YOUR DOMAIN
         const CHANNEL_ID = 'UCoFnJVSRPCkEOvkWhV7Iqhg';
 
         // Ensure all elements exist
@@ -323,6 +340,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 1. Fetch Real Subscriber Count
         async function fetchRealStats() {
+            if (API_KEY === 'YOUR_YOUTUBE_API_KEY') {
+                console.warn("YouTube API key is missing. Showing default stats.");
+                subscriberCount.innerText = "0.01K+";
+                viewCount.innerText = "0.1M+";
+                videoCount.innerText = "30+";
+                return;
+            }
             try {
                 console.log("Fetching YouTube Stats...");
                 const response = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${CHANNEL_ID}&key=${API_KEY}&t=${Date.now()}`);
@@ -398,4 +422,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
     updateSarcasticStats();
 });
-
