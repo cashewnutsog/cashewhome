@@ -322,22 +322,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (!viewerCount || !subscriberCount || !viewCount || !videoCount) return;
 
-        // 1. Hardcoded Stats
+        // 1. Hardcoded & Dynamic Stats
         subscriberCount.innerText = "17";
-        videoCount.innerText = "7";
-        viewCount.innerText = "2.4K"; // Added a reasonable total views count
+        const totalVideos = document.querySelectorAll('.video-card').length;
+        videoCount.innerText = totalVideos || "0";
 
-        // 2. Dynamic Viewer Growth Logic
-        // Starting at 319 on Jan 21, 2026, increasing by ~1.5 per day
+        // 2. Dynamic Total Views Growth Logic
+        // Starting at 319 on Jan 21, 2026, increasing by ~2 per day (1, 2, or 3)
         const startDate = new Date('January 21, 2026').getTime();
         const now = new Date().getTime();
         const diffDays = Math.floor((now - startDate) / (1000 * 60 * 60 * 24));
 
-        // Base 319 + 1 or 2 per day (averaged to 1.5 for simplicity, or we can use a small random factor)
-        const baseViewers = 319;
-        const currentViewers = baseViewers + (diffDays * 1.5);
+        const baseViews = 319;
+        const currentViews = baseViews + (diffDays * 2); // Averaging to 2 per day
+        viewCount.innerText = Math.floor(currentViews).toLocaleString();
 
-        viewerCount.innerText = Math.floor(currentViewers).toLocaleString();
+        // 3. Live Viewers (Random 1-3)
+        function updateViewers() {
+            viewerCount.innerText = Math.floor(Math.random() * 3) + 1;
+        }
+        updateViewers();
+        setInterval(updateViewers, 3000);
 
         const sarcasticCaptions = [
             "Mom is watching...",
