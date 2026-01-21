@@ -312,21 +312,32 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Real Live Stats Logic
-    function updateSarcasticStats() {
+    // Simulated Stats Logic
+    function updateSimulatedStats() {
         const viewerCount = document.getElementById('live-viewers');
         const subscriberCount = document.getElementById('live-subscribers');
         const viewCount = document.getElementById('live-views');
         const videoCount = document.getElementById('live-videos');
         const caption = document.getElementById('sarcastic-caption');
-        const API_KEY = 'AIzaSyAQe2ZCyWJsR2vU6ExMOZNeOImXlN3LoYY'; // IMPORTANT: RESTRICT THIS KEY IN GOOGLE CONSOLE TO YOUR DOMAIN
-        const CHANNEL_ID = 'UCoFnJVSRPCkEOvkWhV7Iqhg';
 
-        // Ensure all elements exist
-        if (!viewerCount || !caption || !subscriberCount || !viewCount || !videoCount) {
-            console.error("Stats elements missing!");
-            return;
-        }
+        if (!viewerCount || !subscriberCount || !viewCount || !videoCount) return;
+
+        // 1. Hardcoded Stats
+        subscriberCount.innerText = "17";
+        videoCount.innerText = "7";
+        viewCount.innerText = "2.4K"; // Added a reasonable total views count
+
+        // 2. Dynamic Viewer Growth Logic
+        // Starting at 319 on Jan 21, 2026, increasing by ~1.5 per day
+        const startDate = new Date('January 21, 2026').getTime();
+        const now = new Date().getTime();
+        const diffDays = Math.floor((now - startDate) / (1000 * 60 * 60 * 24));
+
+        // Base 319 + 1 or 2 per day (averaged to 1.5 for simplicity, or we can use a small random factor)
+        const baseViewers = 319;
+        const currentViewers = baseViewers + (diffDays * 1.5);
+
+        viewerCount.innerText = Math.floor(currentViewers).toLocaleString();
 
         const sarcasticCaptions = [
             "Mom is watching...",
@@ -338,87 +349,9 @@ document.addEventListener('DOMContentLoaded', () => {
             "Waiting for a miracle"
         ];
 
-        // 1. Fetch Real Subscriber Count
-        async function fetchRealStats() {
-            if (API_KEY === 'YOUR_YOUTUBE_API_KEY') {
-                console.warn("YouTube API key is missing. Showing default stats.");
-                subscriberCount.innerText = "0.01K+";
-                viewCount.innerText = "0.1M+";
-                videoCount.innerText = "30+";
-                return;
-            }
-            try {
-                console.log("Fetching YouTube Stats...");
-                const response = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${CHANNEL_ID}&key=${API_KEY}&t=${Date.now()}`);
-
-                if (!response.ok) {
-                    const errData = await response.json();
-                    const reason = errData.error?.message || "Check restrictions";
-                    throw new Error(`YouTube API Error: ${reason}`);
-                }
-
-                const data = await response.json();
-                console.log("YouTube API Data:", data);
-
-                if (data.items && data.items.length > 0) {
-                    const stats = data.items[0].statistics;
-                    subscriberCount.innerText = parseInt(stats.subscriberCount).toLocaleString();
-                    viewCount.innerText = parseInt(stats.viewCount).toLocaleString();
-                    videoCount.innerText = parseInt(stats.videoCount).toLocaleString();
-                    subscriberCount.title = "Live YouTube stats";
-                } else {
-                    console.warn("No channel data found.");
-                    subscriberCount.innerText = "N/A";
-                    viewCount.innerText = "N/A";
-                    videoCount.innerText = "N/A";
-                }
-            } catch (error) {
-                console.error('Failed to fetch YouTube stats:', error);
-
-                // Detailed error feedback
-                let errorMsg = "API Error";
-                if (error.message.includes("403")) errorMsg = "Check Restrictions";
-                if (error.message.includes("400")) errorMsg = "Bad Request";
-
-                subscriberCount.innerText = "Err";
-                viewCount.innerText = "Err";
-                videoCount.innerText = "Err";
-                subscriberCount.title = error.message;
-            }
-        }
-
-        // Fetch immediately and then every minute
-        fetchRealStats();
-        setInterval(fetchRealStats, 60000);
-
-        // Manual Refresh
-        const refreshBtn = document.getElementById('refresh-stats');
-        if (refreshBtn) {
-            refreshBtn.addEventListener('click', () => {
-                refreshBtn.style.transform = 'rotate(360deg)';
-                fetchRealStats();
-                setTimeout(() => { refreshBtn.style.transform = 'rotate(0deg)'; }, 500);
-            });
-        }
-
-        // 2. Simulated Live Viewers (Still fake as API doesn't give realtime concurrent viewers for channel pages)
-        // Update Viewers (Random 1-3) with glitch chance
-        setInterval(() => {
-            const isGlitch = Math.random() < 0.05; // 5% chance
-            if (isGlitch) {
-                viewerCount.innerText = "14,023";
-                viewerCount.style.color = "#e74c3c"; // Red for glitch
-                setTimeout(() => {
-                    viewerCount.innerText = Math.floor(Math.random() * 3) + 1;
-                    viewerCount.style.color = "#ffffff";
-                }, 150);
-            } else {
-                viewerCount.innerText = Math.floor(Math.random() * 3) + 1;
-            }
-        }, 3000);
-
         // Update Caption (every 5s)
-        setInterval(() => {
+        let captionInterval = setInterval(() => {
+            if (!caption) return clearInterval(captionInterval);
             const randomCaption = sarcasticCaptions[Math.floor(Math.random() * sarcasticCaptions.length)];
             caption.style.opacity = 0;
             setTimeout(() => {
@@ -426,7 +359,54 @@ document.addEventListener('DOMContentLoaded', () => {
                 caption.style.opacity = 1;
             }, 500);
         }, 5000);
+
+        // Manual Refresh (Simulated)
+        const refreshBtn = document.getElementById('refresh-stats');
+        if (refreshBtn) {
+            refreshBtn.addEventListener('click', () => {
+                refreshBtn.style.transform = 'rotate(360deg)';
+                // Just brief jitter to simulate "refreshing"
+                const originalValue = viewerCount.innerText;
+                viewerCount.innerText = "...";
+                setTimeout(() => {
+                    viewerCount.innerText = originalValue;
+                    refreshBtn.style.transform = 'rotate(0deg)';
+                }, 800);
+            });
+        }
     }
 
-    updateSarcasticStats();
+    updateSimulatedStats();
+
+    // Release Countdown Logic
+    const targetDate = new Date('February 6, 2026 16:20:00').getTime();
+    const countdownDays = document.getElementById('days');
+    const countdownHours = document.getElementById('hours');
+    const countdownMinutes = document.getElementById('minutes');
+    const countdownSeconds = document.getElementById('seconds');
+
+    function updateCountdown() {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+
+        if (distance < 0) {
+            document.getElementById('release-countdown').innerHTML = "RELEASED!";
+            return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        if (countdownDays) countdownDays.innerText = days.toString().padStart(2, '0');
+        if (countdownHours) countdownHours.innerText = hours.toString().padStart(2, '0');
+        if (countdownMinutes) countdownMinutes.innerText = minutes.toString().padStart(2, '0');
+        if (countdownSeconds) countdownSeconds.innerText = seconds.toString().padStart(2, '0');
+    }
+
+    if (countdownDays) {
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    }
 });

@@ -797,8 +797,43 @@ header {
 
 nav {
     display: flex;
-    gap: 1.5rem;
+    gap: 2rem;
     flex-wrap: wrap;
+    align-items: center;
+}
+
+.countdown-container {
+    display: flex;
+    gap: 1.2rem;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 0.5rem 1.2rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(4px);
+    margin-left: 1rem;
+}
+
+.countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 40px;
+}
+
+.countdown-item span {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    line-height: 1;
+}
+
+.countdown-item small {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    margin-top: 0.2rem;
 }
 
 nav a {
@@ -1113,5 +1148,19 @@ section>p {
         backdrop-filter: blur(5px);
         /* Reduced blur radius from 12px */
         -webkit-backdrop-filter: blur(5px);
+    }
+
+    /* Countdown Mobile Fix */
+    .countdown-container {
+        margin-left: 0;
+        margin-top: 1rem;
+        gap: 0.8rem;
+        padding: 0.4rem 0.8rem;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .countdown-item {
+        min-width: 35px;
     }
 }
