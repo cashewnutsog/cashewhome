@@ -303,7 +303,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const viewCount = document.getElementById('live-views');
         const videoCount = document.getElementById('live-videos');
         const caption = document.getElementById('sarcastic-caption');
-        const API_KEY = 'AIzaSyAQe2ZCyWJsR2vU6ExMOZNeOImXlN3LoYY';
         const CHANNEL_ID = 'UCoFnJVSRPCkEOvkWhV7Iqhg';
 
         // Ensure all elements exist
@@ -399,3 +398,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     updateSarcasticStats();
 });
+
