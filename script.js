@@ -352,7 +352,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 const response = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${CHANNEL_ID}&key=${API_KEY}&t=${Date.now()}`);
 
                 if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                    const errData = await response.json();
+                    const reason = errData.error?.message || "Check restrictions";
+                    throw new Error(`YouTube API Error: ${reason}`);
                 }
 
                 const data = await response.json();
@@ -363,6 +365,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     subscriberCount.innerText = parseInt(stats.subscriberCount).toLocaleString();
                     viewCount.innerText = parseInt(stats.viewCount).toLocaleString();
                     videoCount.innerText = parseInt(stats.videoCount).toLocaleString();
+                    subscriberCount.title = "Live YouTube stats";
                 } else {
                     console.warn("No channel data found.");
                     subscriberCount.innerText = "N/A";
@@ -371,11 +374,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             } catch (error) {
                 console.error('Failed to fetch YouTube stats:', error);
-                // Visual feedback for error
+
+                // Detailed error feedback
+                let errorMsg = "API Error";
+                if (error.message.includes("403")) errorMsg = "Check Restrictions";
+                if (error.message.includes("400")) errorMsg = "Bad Request";
+
                 subscriberCount.innerText = "Err";
                 viewCount.innerText = "Err";
                 videoCount.innerText = "Err";
-                subscriberCount.title = "Check console for details";
+                subscriberCount.title = error.message;
             }
         }
 
