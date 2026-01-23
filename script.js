@@ -40,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Wait for CSS transition (0.6s) to finish before removing preloader
                     setTimeout(() => {
                         preloader.remove();
+                        document.body.classList.remove('preloader-active');
 
                         // Stage 1: Fade in main container
                         container.classList.add('loaded');

@@ -250,6 +250,10 @@ body.light-theme {
     background-color: #f8f9fa !important;
 }
 
+body.preloader-active {
+    overflow: hidden !important;
+}
+
 #bg-backdrop {
     position: fixed;
     top: 0;
