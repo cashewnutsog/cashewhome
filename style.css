@@ -823,18 +823,15 @@ nav {
 
 .countdown-container {
     display: flex;
-    gap: 1rem;
-    background: none;
-    /* Removed box bg */
+    gap: 1.2rem;
+    background: linear-gradient(90deg, #4a00e0, #f39c12);
+    -webkit-background-clip: text;
+    background-clip: text;
     padding: 0;
-    /* Removed padding */
     border-radius: 0;
     border: none;
-    /* Removed border */
     backdrop-filter: none;
-    /* Removed blur */
     margin-left: 0;
-    /* Align with DashBoard text */
 }
 
 .countdown-item {
@@ -845,12 +842,13 @@ nav {
 }
 
 .countdown-item span {
-    font-family: 'Benton Sans Extra Comp Black', 'Roboto Mono', monospace;
-    font-size: 1.4rem;
-    /* Bigger */
-    font-weight: 800;
-    /* Bolder */
+    font-family: 'Antonio', 'Roboto Mono', monospace;
+    font-size: 1.8rem;
+    /* Increased size for better impact */
+    font-weight: 700;
+    /* Boldest Antonio */
     color: var(--text-color);
+    -webkit-text-fill-color: var(--text-color);
     line-height: 1;
 }
 
@@ -858,8 +856,9 @@ nav {
     font-size: 0.55rem;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: var(--text-dim);
+    -webkit-text-fill-color: transparent;
     margin-top: 0.1rem;
+    font-weight: 700;
 }
 
 nav a {
