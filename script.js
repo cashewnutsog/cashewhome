@@ -384,7 +384,29 @@ document.addEventListener('DOMContentLoaded', () => {
     updateSimulatedStats();
 
     // Release Countdown Logic
-    const targetDate = new Date('January 24, 2026 17:45:00').getTime();
+    function getNextSaturdayTarget() {
+        const now = new Date();
+        const target = new Date();
+
+        // Target Saturday (6) at 17:45 (5:45 PM)
+        target.setHours(17, 45, 0, 0);
+
+        const day = now.getDay();
+        let daysUntilSaturday = (6 - day + 7) % 7;
+
+        // If today is Saturday
+        if (daysUntilSaturday === 0) {
+            // If 5:45 PM has already passed today, target next Saturday
+            if (now.getTime() >= target.getTime()) {
+                daysUntilSaturday = 7;
+            }
+        }
+
+        target.setDate(now.getDate() + daysUntilSaturday);
+        return target.getTime();
+    }
+
+    let targetDate = getNextSaturdayTarget();
     const countdownDays = document.getElementById('days');
     const countdownHours = document.getElementById('hours');
     const countdownMinutes = document.getElementById('minutes');
@@ -392,11 +414,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateCountdown() {
         const now = new Date().getTime();
-        const distance = targetDate - now;
+        let distance = targetDate - now;
 
+        // If target reached, reset for next week
         if (distance < 0) {
-            document.getElementById('release-countdown').innerHTML = "RELEASED!";
-            return;
+            targetDate = getNextSaturdayTarget();
+            distance = targetDate - now;
         }
 
         const days = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -415,4 +438,3 @@ document.addEventListener('DOMContentLoaded', () => {
         setInterval(updateCountdown, 1000);
     }
 });
-
