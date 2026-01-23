@@ -303,6 +303,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 enabled: window.innerWidth > 768, // Disable Lenis on mobile
             });
 
+            lenis.on('scroll', () => {
+                document.body.classList.add('is-scrolling');
+                clearTimeout(window.scrollTimeout);
+                window.scrollTimeout = setTimeout(() => {
+                    document.body.classList.remove('is-scrolling');
+                }, 200);
+            });
+
             function raf(time) {
                 lenis.raf(time);
                 requestAnimationFrame(raf);
@@ -325,7 +333,20 @@ document.addEventListener('DOMContentLoaded', () => {
         // 1. Hardcoded & Dynamic Stats
         subscriberCount.innerText = "17";
         const totalVideos = document.querySelectorAll('.video-card').length;
-        videoCount.innerText = totalVideos || "0";
+
+        // Dynamic Weekly Video Growth
+        // Starting with actual video cards, adding 1 for every Saturday 5:45 PM that passes
+        // Start date: Saturday, Jan 24, 2026, 17:45:00
+        const startSaturday = new Date('January 24, 2026 17:45:00').getTime();
+        const nowTime = new Date().getTime();
+
+        let extraVideos = 0;
+        if (nowTime >= startSaturday) {
+            // Number of full weeks passed since the first Saturday
+            extraVideos = Math.floor((nowTime - startSaturday) / (1000 * 60 * 60 * 24 * 7)) + 1;
+        }
+
+        videoCount.innerText = (totalVideos + extraVideos).toString();
 
         // 2. Dynamic Total Views Growth Logic
         // Starting at 319 on Jan 21, 2026, increasing by ~2 per day (1, 2, or 3)

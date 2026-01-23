@@ -845,7 +845,7 @@ nav {
 }
 
 .countdown-item span {
-    font-family: 'Roboto Mono', monospace;
+    font-family: 'Benton Sans Extra Comp Black', 'Roboto Mono', monospace;
     font-size: 1.4rem;
     /* Bigger */
     font-weight: 800;
@@ -1200,4 +1200,9 @@ section>p {
     .countdown-item {
         min-width: 35px;
     }
+}
+
+/* Scroll Fix for Iframes */
+body.is-scrolling .video-card iframe {
+    pointer-events: none;
 }
