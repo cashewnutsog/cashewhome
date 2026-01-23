@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     setTimeout(() => {
                         preloader.remove();
                         document.body.classList.remove('preloader-active');
+                        document.documentElement.classList.remove('preloader-active');
 
                         // Stage 1: Fade in main container
                         container.classList.add('loaded');
