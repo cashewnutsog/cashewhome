@@ -384,7 +384,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateSimulatedStats();
 
     // Release Countdown Logic
-    const targetDate = new Date('February 6, 2026 16:20:00').getTime();
+    const targetDate = new Date('January 24, 2026 17:45:00').getTime();
     const countdownDays = document.getElementById('days');
     const countdownHours = document.getElementById('hours');
     const countdownMinutes = document.getElementById('minutes');
@@ -415,3 +415,4 @@ document.addEventListener('DOMContentLoaded', () => {
         setInterval(updateCountdown, 1000);
     }
 });
+
