@@ -341,13 +341,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!viewerCount || !subscriberCount || !viewCount || !videoCount) return;
 
         // 1. Hardcoded & Dynamic Stats
-        subscriberCount.innerText = "17";
+        subscriberCount.innerText = "21";
         const totalVideos = document.querySelectorAll('.video-card').length;
 
         // Dynamic Weekly Video Growth
         // Starting with actual video cards, adding 1 for every Saturday 5:45 PM that passes
-        // Start date: Saturday, Jan 24, 2026, 17:45:00
-        const startSaturday = new Date('January 24, 2026 17:45:00').getTime();
+        // Start date: Saturday, Jan 24, 2026, 17:30:00
+        const startSaturday = new Date('January 24, 2026 17:30:00').getTime();
         const nowTime = new Date().getTime();
 
         let extraVideos = 0;
@@ -364,7 +364,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const now = new Date().getTime();
         const diffDays = Math.floor((now - startDate) / (1000 * 60 * 60 * 24));
 
-        const baseViews = 319;
+        const baseViews = 396;
         const currentViews = baseViews + (diffDays * 2); // Averaging to 2 per day
         viewCount.innerText = Math.floor(currentViews).toLocaleString();
 
@@ -419,8 +419,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const now = new Date();
         const target = new Date();
 
-        // Target Saturday (6) at 17:45 (5:45 PM)
-        target.setHours(17, 45, 0, 0);
+        // Target Saturday (6) at 17:30 (5:30 PM)
+        target.setHours(17, 30, 0, 0);
 
         const day = now.getDay();
         let daysUntilSaturday = (6 - day + 7) % 7;
