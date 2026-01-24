@@ -360,7 +360,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 2. Dynamic Total Views Growth Logic
         // Starting at 319 on Jan 21, 2026, increasing by ~2 per day (1, 2, or 3)
-        const startDate = new Date('January 21, 2026').getTime();
+        const startDate = new Date('January 24, 2026').getTime();
         const now = new Date().getTime();
         const diffDays = Math.floor((now - startDate) / (1000 * 60 * 60 * 24));
 
