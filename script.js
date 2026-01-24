@@ -346,8 +346,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Dynamic Weekly Video Growth
         // Starting with actual video cards, adding 1 for every Saturday 5:45 PM that passes
-        // Start date: Saturday, Jan 24, 2026, 17:30:00
-        const startSaturday = new Date('January 24, 2026 17:30:00').getTime();
+        // Start date: Saturday, Jan 31, 2026, 17:30:00
+        const startSaturday = new Date('January 31, 2026 17:30:00').getTime();
         const nowTime = new Date().getTime();
 
         let extraVideos = 0;
