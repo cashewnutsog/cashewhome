@@ -437,43 +437,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    const tickAudio = new Audio('bgclock.mp3');
+    tickAudio.preload = 'auto';
+
     function playTick() {
         if (!isSoundEnabled) return;
 
         try {
-            if (!audioCtx) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            // Clone the audio node to allow overlapping sounds (though unlikely here)
+            // or just reset currentTime to 0 and play
+            tickAudio.currentTime = 0;
+            const playPromise = tickAudio.play();
+
+            if (playPromise !== undefined) {
+                playPromise.catch(err => {
+                    console.log('Tick play prevented:', err);
+                });
             }
-
-            if (audioCtx.state === 'suspended') {
-                audioCtx.resume();
-            }
-
-            // Create a short burst of white noise for the "tchk" sound
-            const bufferSize = audioCtx.sampleRate * 0.02; // 20ms burst
-            const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
-            const data = buffer.getChannelData(0);
-            for (let i = 0; i < bufferSize; i++) {
-                data[i] = Math.random() * 2 - 1;
-            }
-
-            const noise = audioCtx.createBufferSource();
-            noise.buffer = buffer;
-
-            // High-pass filter to make it sound sharp and "clicky"
-            const filter = audioCtx.createBiquadFilter();
-            filter.type = 'highpass';
-            filter.frequency.value = 5000;
-
-            const gain = audioCtx.createGain();
-            gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.02);
-
-            noise.connect(filter);
-            filter.connect(gain);
-            gain.connect(audioCtx.destination);
-
-            noise.start();
         } catch (e) {
             console.error('Audio tick error:', e);
         }
