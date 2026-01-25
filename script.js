@@ -420,40 +420,46 @@ document.addEventListener('DOMContentLoaded', () => {
     let isSoundEnabled = false;
     let audioCtx = null;
 
+    const tickAudio = new Audio('bgclock.mp3');
+    tickAudio.preload = 'auto';
+
     if (soundToggle) {
         soundToggle.addEventListener('click', () => {
             isSoundEnabled = !isSoundEnabled;
-            soundToggle.classList.toggle('active');
 
             if (isSoundEnabled) {
-                soundIcon.classList.replace('fa-volume-mute', 'fa-volume-up');
-                // Resume AudioContext if it exists (for browser policies)
+                soundToggle.classList.add('active');
+                soundIcon.className = 'fas fa-volume-up';
+                // Resume AudioContext if it exists
                 if (audioCtx && audioCtx.state === 'suspended') {
                     audioCtx.resume();
                 }
             } else {
-                soundIcon.classList.replace('fa-volume-up', 'fa-volume-mute');
+                soundToggle.classList.remove('active');
+                soundIcon.className = 'fas fa-volume-mute';
+                // Stop any current tick sound immediately
+                tickAudio.pause();
+                tickAudio.currentTime = 0;
             }
         });
     }
-
-    const tickAudio = new Audio('bgclock.mp3');
-    tickAudio.preload = 'auto';
 
     function playTick() {
         if (!isSoundEnabled) return;
 
         try {
-            // Clone the audio node to allow overlapping sounds (though unlikely here)
-            // or just reset currentTime to 0 and play
-            tickAudio.currentTime = 0;
-            const playPromise = tickAudio.play();
+            // Slight delay (50ms) to ensure it doesn't feel "early" compared to visual update
+            setTimeout(() => {
+                if (!isSoundEnabled) return; // Re-check in case it was disabled during delay
+                tickAudio.currentTime = 0;
+                const playPromise = tickAudio.play();
 
-            if (playPromise !== undefined) {
-                playPromise.catch(err => {
-                    console.log('Tick play prevented:', err);
-                });
-            }
+                if (playPromise !== undefined) {
+                    playPromise.catch(err => {
+                        console.log('Tick play prevented:', err);
+                    });
+                }
+            }, 50);
         } catch (e) {
             console.error('Audio tick error:', e);
         }
