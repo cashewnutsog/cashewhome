@@ -449,21 +449,31 @@ document.addEventListener('DOMContentLoaded', () => {
                 audioCtx.resume();
             }
 
-            const osc = audioCtx.createOscillator();
+            // Create a short burst of white noise for the "tchk" sound
+            const bufferSize = audioCtx.sampleRate * 0.02; // 20ms burst
+            const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+            const data = buffer.getChannelData(0);
+            for (let i = 0; i < bufferSize; i++) {
+                data[i] = Math.random() * 2 - 1;
+            }
+
+            const noise = audioCtx.createBufferSource();
+            noise.buffer = buffer;
+
+            // High-pass filter to make it sound sharp and "clicky"
+            const filter = audioCtx.createBiquadFilter();
+            filter.type = 'highpass';
+            filter.frequency.value = 5000;
+
             const gain = audioCtx.createGain();
+            gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.02);
 
-            osc.type = 'sine';
-            // Crisp, high-pitched tick
-            osc.frequency.setValueAtTime(1000, audioCtx.currentTime);
-
-            gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.05);
-
-            osc.connect(gain);
+            noise.connect(filter);
+            filter.connect(gain);
             gain.connect(audioCtx.destination);
 
-            osc.start();
-            osc.stop(audioCtx.currentTime + 0.05);
+            noise.start();
         } catch (e) {
             console.error('Audio tick error:', e);
         }
