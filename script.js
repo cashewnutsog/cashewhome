@@ -415,6 +415,60 @@ document.addEventListener('DOMContentLoaded', () => {
     updateSimulatedStats();
 
     // Release Countdown Logic
+    const soundToggle = document.getElementById('sound-toggle');
+    const soundIcon = document.getElementById('sound-icon');
+    let isSoundEnabled = false;
+    let audioCtx = null;
+
+    if (soundToggle) {
+        soundToggle.addEventListener('click', () => {
+            isSoundEnabled = !isSoundEnabled;
+            soundToggle.classList.toggle('active');
+
+            if (isSoundEnabled) {
+                soundIcon.classList.replace('fa-volume-mute', 'fa-volume-up');
+                // Resume AudioContext if it exists (for browser policies)
+                if (audioCtx && audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+            } else {
+                soundIcon.classList.replace('fa-volume-up', 'fa-volume-mute');
+            }
+        });
+    }
+
+    function playTick() {
+        if (!isSoundEnabled) return;
+
+        try {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+
+            osc.type = 'sine';
+            // Crisp, high-pitched tick
+            osc.frequency.setValueAtTime(1000, audioCtx.currentTime);
+
+            gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.05);
+
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.05);
+        } catch (e) {
+            console.error('Audio tick error:', e);
+        }
+    }
+
     function getNextSaturdayTarget() {
         const now = new Date();
         const target = new Date();
@@ -442,6 +496,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const countdownHours = document.getElementById('hours');
     const countdownMinutes = document.getElementById('minutes');
     const countdownSeconds = document.getElementById('seconds');
+    let lastSecond = -1;
 
     function updateCountdown() {
         const now = new Date().getTime();
@@ -461,11 +516,19 @@ document.addEventListener('DOMContentLoaded', () => {
         if (countdownDays) countdownDays.innerText = days.toString().padStart(2, '0');
         if (countdownHours) countdownHours.innerText = hours.toString().padStart(2, '0');
         if (countdownMinutes) countdownMinutes.innerText = minutes.toString().padStart(2, '0');
-        if (countdownSeconds) countdownSeconds.innerText = seconds.toString().padStart(2, '0');
+
+        if (countdownSeconds) {
+            countdownSeconds.innerText = seconds.toString().padStart(2, '0');
+            // Play tick sound when seconds change
+            if (seconds !== lastSecond) {
+                playTick();
+                lastSecond = seconds;
+            }
+        }
     }
 
     if (countdownDays) {
         updateCountdown();
-        setInterval(updateCountdown, 1000);
+        setInterval(updateCountdown, 100); // Increased frequency for smoother sync
     }
 });

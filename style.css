@@ -904,21 +904,34 @@ nav a.active {
     cursor: pointer;
 }
 
+.sound-toggle,
 .theme-toggle {
-    background: var(--card-bg);
+    background: var(--sidebar-bg);
     padding: 8px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
     width: 40px;
     height: 40px;
 }
 
+.sound-toggle:hover,
 .theme-toggle:hover {
     transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(243, 156, 18, 0.4);
+}
+
+.sound-toggle i {
+    font-size: 1.1rem;
+    color: var(--text-color);
+    transition: color 0.3s;
+}
+
+.sound-toggle.active i {
+    color: var(--accent-color);
 }
 
 #theme-icon {
