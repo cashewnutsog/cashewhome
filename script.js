@@ -341,7 +341,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!viewerCount || !subscriberCount || !viewCount || !videoCount) return;
 
         // 1. Hardcoded & Dynamic Stats
-        subscriberCount.innerText = "21";
+        subscriberCount.innerText = "22";
         const totalVideos = document.querySelectorAll('.video-card').length;
 
         // Dynamic Weekly Video Growth

@@ -815,19 +815,20 @@ nav {
 .nav-brand-wrapper {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 0.1rem;
+    width: 100%;
 }
 
 .countdown-label {
-    font-size: 0.7rem;
+    font-size: 0.9rem;
     font-weight: 700;
     color: var(--accent-color);
     text-transform: uppercase;
     letter-spacing: 1.5px;
     opacity: 0.9;
     margin-top: 0.2rem;
-    margin-bottom: -0.1rem;
+    margin-bottom: 0.2rem;
 }
 
 .countdown-container {
@@ -841,6 +842,7 @@ nav {
     border: none;
     backdrop-filter: none;
     margin-left: 0;
+    justify-content: center;
 }
 
 .countdown-item {
@@ -852,7 +854,7 @@ nav {
 
 .countdown-item span {
     font-family: 'Antonio', 'Roboto Mono', monospace;
-    font-size: 1.8rem;
+    font-size: 2.5rem;
     /* Increased size for better impact */
     font-weight: 700;
     /* Boldest Antonio */
@@ -1186,9 +1188,9 @@ section>p {
 
     /* Countdown Mobile Fix */
     .nav-brand-wrapper {
-        align-items: flex-start;
+        align-items: center;
         width: 100%;
-        text-align: left;
+        text-align: center;
     }
 
     .countdown-label {
@@ -1202,7 +1204,7 @@ section>p {
         gap: 0.8rem;
         padding: 0.4rem 0;
         width: 100%;
-        justify-content: flex-start;
+        justify-content: center;
     }
 
     .countdown-item {
