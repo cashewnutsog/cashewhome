@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Welcome to my channel, CashewNuts gives you deep and vast songs of hip hop, instrumentals, and lofi music.">
+    <meta name="keywords" content="CashewNuts, Music Producer, Hip Hop, Instrumentals, Lofi">
+    <meta name="author" content="CashewNuts">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="CashewNuts | The Resume">
+    <meta property="og:description" content="A Professional Music Producer And Content Creator">
+    <meta property="og:image" content="banner.webp">
+
+    <title>CashewNuts | The Resume</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Antonio:wght@700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+</head>
+
+<body class="preloader-active">
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader-content">
+            <h2 class="loader-text">CashewNuts</h2>
+            <div class="loader-bar-container">
+                <div class="loader-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="search-modal" class="modal search-modal">
+        <div class="search-content" data-lenis-prevent>
+            <i class="fas fa-times close-search" id="close-search"></i>
+            <div class="search-input-group">
+                <input type="text" id="music-search" placeholder="SEARCH MUSICAL WORKS...">
+                <i class="fas fa-search"></i>
+            </div>
+            <div id="search-results"></div>
+        </div>
+    </div>
+
+    <div id="works-modal" class="modal">
+        <div class="modal-content works-modal-content" data-lenis-prevent>
+            <div class="modal-header">
+                <h2 class="section-title">All Works</h2>
+                <i class="fas fa-times close-modal" id="close-works-modal"></i>
+            </div>
+            <div id="works-gallery-grid" class="works-grid">
+                <!-- Will be populated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <nav>
+        <div class="nav-links desktop-only">
+            <a href="#about">About</a>
+            <a href="#works">Works</a>
+        </div>
+        <div class="nav-center">
+            <span class="countdown-label">NEXT RELEASE IN</span>
+            <div id="countdown-timer" class="countdown-flex">
+                <div class="countdown-box">
+                    <span id="days">00</span>
+                    <label>Days</label>
+                </div>
+                <div class="countdown-box">
+                    <span id="hours">00</span>
+                    <label>Hrs</label>
+                </div>
+                <div class="countdown-box">
+                    <span id="minutes">00</span>
+                    <label>Min</label>
+                </div>
+                <div class="countdown-box">
+                    <span id="seconds">00</span>
+                    <label>Sec</label>
+                </div>
+            </div>
+        </div>
+        <div class="nav-links">
+            <div class="nav-actions">
+                <i class="fas fa-search" id="search-trigger" style="cursor: pointer;"></i>
+                <div id="theme-toggle" style="cursor: pointer; display: flex; align-items: center;">
+                    <img id="theme-icon" src="moon.png" alt="Theme Toggle" width="20" height="20">
+                </div>
+            </div>
+            <div class="desktop-only" style="display: flex; gap: 2rem;">
+                <a href="#gallery">Awaited</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+
+
+    <header class="hero">
+        <div class="hero-img-container">
+            <img src="banner.webp" alt="Hero Banner" class="hero-img">
+        </div>
+        <div class="hero-content">
+            <div class="hero-profile-row">
+                <div class="hero-profile-container">
+                    <img src="profile.jpg" alt="Profile" class="hero-avatar">
+                </div>
+                <div class="hero-text-block">
+                    <h1 class="hero-title">CASHEWNUTSOG*</h1>
+                    <p class="hero-caption">A Professional Music Producer And Content Creator</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="works" class="section-container">
+        <div class="section-header">
+            <h2 class="section-title">My Works</h2>
+            <a href="#" class="view-all" id="view-all-works">View All →</a>
+        </div>
+        <div id="main-works-grid" class="works-grid">
+            <!-- Will be populated by JS to show only top 4 -->
+        </div>
+    </section>
+
+    <section id="about" class="about-section">
+        <span class="about-label">ABOUT ME</span>
+        <p class="about-text">
+            <span>CashewNuts</span> is an independent music producer and multi-instrumentalist.
+            He shares <span>deep songs</span> of hip hop, <span>instrumentals</span>,
+            and <span>lofi music</span> to create the perfect mood for
+            concentration or leisure. Explore his abilities and <a>READ MORE</a>
+        </p>
+
+        <div class="milestones">
+            <div class="milestone-item">
+                <h4 id="stat-subscribers">22</h4>
+                <p>Subscribers</p>
+            </div>
+            <div class="milestone-item">
+                <h4 id="stat-videos">50</h4>
+                <p>Videos Created</p>
+            </div>
+            <div class="milestone-item">
+                <h4 id="stat-views">537</h4>
+                <p>Total Views</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="section-container">
+        <div class="section-header">
+            <h2 class="section-title">Awaited</h2>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item large">
+                <img src="gallery1.webp" alt="Funk De Tah Tah Tah" class="gallery-img">
+                <div class="gallery-overlay">
+                    <p>FUNK DE TAH TAH TAH</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="video-showcase">
+        <div class="video-info">
+            <h2 class="section-title">My Videos</h2>
+            <p id="video-description">A collection of cinematic audio-visual journeys through soundscapes and
+                rhythm.
+            </p>
+        </div>
+        <div class="video-player-container">
+            <div class="nav-arrow left" id="prev-video"><i class="fas fa-chevron-left"></i></div>
+            <div class="video-placeholder-inner" id="video-frame-container">
+                <iframe id="main-video-frame" width="100%" height="100%" src="https://www.youtube.com/embed/hFrG3wJ5uvo"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+            <div class="nav-arrow right" id="next-video"><i class="fas fa-chevron-right"></i></div>
+        </div>
+        <div class="video-footer">
+            <p id="video-title">DARK PASTS. / FILM PROJECT</p>
+            <p id="video-count">PROJECT 001 / 007</p>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="footer-main">
+            <div class="footer-brand">
+                <h2>DELIVER BEST QUALITY MUSICAL WORKS</h2>
+                <div class="footer-minor-details">
+                    <p><i class="fas fa-map-marker-alt"></i> India</p>
+                    <p><i class="fas fa-envelope"></i> <span id="copy-email"
+                            style="cursor: pointer; position: relative;">cashewnuts@gmail.com</span></p>
+                    <p><a href="https://www.youtube.com/@CashewNutsog" target="_blank"
+                            style="color: inherit; text-decoration: none;"><i class="fas fa-link"></i>
+                            youtube.com/@CashewNutsog</a></p>
+                </div>
+            </div>
+            <div class="social-branding">
+                <h3 class="footer-subscribe-text">SUBSCRIBE</h3>
+                <a href="https://www.youtube.com/@CashewNutsog" target="_blank" class="footer-youtube-link">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 CashewNuts. All Rights Reserved.</p>
+            <div class="footer-links">
+                <a href="#about">About</a>
+                <a href="#works">Music</a>
+                <a href="#gallery">Awaited</a>
+            </div>
+            <div class="social-icons">
+                <a href="#" target="_blank"><i class="fab fa-x-twitter"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-telegram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
