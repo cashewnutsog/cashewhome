@@ -418,8 +418,8 @@ nav {
     position: relative;
     z-index: 2;
     width: 100%;
-    margin-top: -150px;
-    /* Pull up to overlap banner more */
+    margin-top: -280px;
+    /* Lifted higher to stand on the banner */
     padding-bottom: 100px;
     /* Space below hero content */
     display: flex;
@@ -474,6 +474,7 @@ nav {
     margin: 0 0 20px -8px;
     font-weight: 700;
     letter-spacing: -4px;
+    color: #fff;
 }
 
 .hero-caption {
@@ -979,6 +980,11 @@ footer {
         margin-top: 50px;
     }
 
+    .hero-content {
+        margin-top: -120px;
+        padding-bottom: 60px;
+    }
+
     .mobile-menu,
     .menu-toggle {
         display: none !important;
@@ -1087,7 +1093,14 @@ body.light-theme .hero-content {
 }
 
 body.light-theme .hero-title {
-    color: var(--text-color);
+    color: #fff;
+    text-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), 0 5px 20px rgba(0, 0, 0, 0.4);
+}
+
+body.light-theme .hero-caption {
+    color: #000;
+    opacity: 0.9;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 body.light-theme .nav-actions i,
