@@ -25,6 +25,20 @@ function raf(time) {
 
 requestAnimationFrame(raf)
 
+// Theme Toggle Initialization (Moved to top for faster response)
+const themeBtn = document.getElementById('theme-toggle');
+const themeIcon = document.getElementById('theme-icon');
+
+if (themeBtn) {
+    themeBtn.addEventListener('click', () => {
+        document.body.classList.toggle('light-theme');
+        const isLight = document.body.classList.contains('light-theme');
+        if (themeIcon) {
+            themeIcon.src = isLight ? 'sun.png' : 'moon.png';
+        }
+    });
+}
+
 // Video Slider Data
 const videos = [
     { id: '4YniDV6ryFQ', title: 'FUNK DE TAH TAH TAH', category: 'BRAZILIAN PHONK' },
@@ -164,10 +178,7 @@ function updateStats() {
 setInterval(updateStats, 60000);
 updateStats();
 
-// 3. Toggles
-
-const themeBtn = document.getElementById('theme-toggle');
-const themeIcon = document.getElementById('theme-icon');
+// Theme variables moved to top
 
 // 1. Preloader and Video Sync Logic
 let preloaderStartTime = Date.now();
@@ -331,11 +342,7 @@ searchInput.addEventListener('input', (e) => {
     }
 });
 
-themeBtn.addEventListener('click', () => {
-    document.body.classList.toggle('light-theme');
-    const isLight = document.body.classList.contains('light-theme');
-    themeIcon.src = isLight ? 'sun.png' : 'moon.png';
-});
+// Theme listener moved to top
 
 // Original slider functions (keep updateVideo, currentVideoIndex, etc.)
 // 4. Copy Email to Clipboard
