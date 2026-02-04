@@ -522,8 +522,10 @@ nav {
 
 .works-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 0.5rem;
+    overflow-x: auto;
+    /* meaningful fallback for very small screens if needed, though 1fr forces fit */
 }
 
 .work-card {
@@ -898,9 +900,7 @@ footer {
         font-size: 5rem;
     }
 
-    .works-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
+
 
     .gallery-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -981,8 +981,16 @@ footer {
     }
 
     .hero-content {
-        margin-top: -120px;
-        padding-bottom: 60px;
+        margin-top: 0;
+        padding-bottom: 0;
+    }
+
+    .hero {
+        justify-content: center;
+    }
+
+    .hero-img-container {
+        height: 100vh;
     }
 
     .mobile-menu,
@@ -1056,7 +1064,6 @@ footer {
         font-size: 2.8rem;
     }
 
-    .works-grid,
     .gallery-grid {
         grid-template-columns: 1fr;
     }
