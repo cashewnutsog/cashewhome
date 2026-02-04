@@ -522,10 +522,8 @@ nav {
 
 .works-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 0.5rem;
-    overflow-x: auto;
-    /* meaningful fallback for very small screens if needed, though 1fr forces fit */
 }
 
 .work-card {
@@ -981,21 +979,43 @@ footer {
     }
 
     .hero-content {
-        margin-top: 0;
-        padding-bottom: 0;
+        margin-top: -120px;
+        padding-bottom: 60px;
+    }
+
+    /* Smaller banner on mobile */
+    .hero-img-container {
+        height: 50vh;
     }
 
     .hero {
+        height: 60vh;
+        /* Adjust container to fit smaller beacon */
         justify-content: center;
-    }
-
-    .hero-img-container {
-        height: 100vh;
     }
 
     .mobile-menu,
     .menu-toggle {
         display: none !important;
+    }
+
+    /* 2 columns for works on mobile */
+    .works-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    /* Scale down text for 2-column layout */
+    .work-overlay {
+        padding: 0.8rem;
+    }
+
+    .work-overlay h3 {
+        font-size: 0.8rem;
+        margin-bottom: 0.2rem;
+    }
+
+    .work-overlay a {
+        font-size: 0.6rem;
     }
 
 
