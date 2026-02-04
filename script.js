@@ -140,8 +140,8 @@ function updateStats() {
     const diffDays = Math.floor((now - startDate) / (1000 * 60 * 60 * 24));
 
     // Calculate values
-    const subTarget = 22;
-    const baseViews = 537;
+    const subTarget = 23;
+    const baseViews = 573;
     const growthRate = 2.5;
     const viewsTarget = Math.floor(baseViews + (diffDays * growthRate));
 
@@ -235,7 +235,7 @@ const searchInput = document.getElementById('music-search');
 const searchResults = document.getElementById('search-results');
 
 const allWorks = [
-    { title: "FUNK DE TAH TAH TAH", id: "4YniDV6ryFQ", img: "" },
+    { title: "FUNK DE TAH TAH TAH", id: "4YniDV6ryFQ", img: "funk-de-tah-tah-tah.webp" },
     { title: "Dark Pasts.", id: "hFrG3wJ5uvo", img: "dark-pasts.webp" },
     { title: "Ignition.", id: "8v3s2oZ-Myc", img: "ignition.webp" },
     { title: "Whelming.", id: "iWr1nApKbhc", img: "whelming.webp" },
