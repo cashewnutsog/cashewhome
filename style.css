@@ -979,7 +979,7 @@ footer {
     }
 
     .hero-content {
-        margin-top: 0;
+        margin-top: 140px;
         padding-bottom: 60px;
     }
 
@@ -989,7 +989,7 @@ footer {
     }
 
     .hero {
-        height: 60vh;
+        height: 80vh;
         /* Adjust container to fit smaller beacon */
         justify-content: center;
     }
@@ -1027,6 +1027,7 @@ footer {
     .hero-caption {
         margin: 0 auto;
         padding-top: 10px;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
     }
 
     .nav-center {
