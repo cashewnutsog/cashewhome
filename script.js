@@ -135,13 +135,13 @@ function animateValue(id, start, end, duration) {
 let statsAnimated = false;
 
 function updateStats() {
-    const startDate = new Date('February 1, 2026 00:00:00').getTime();
+    const startDate = new Date('February 6, 2026 00:00:00').getTime();
     const now = new Date().getTime();
     const diffDays = Math.floor((now - startDate) / (1000 * 60 * 60 * 24));
 
     // Calculate values
     const subTarget = 23;
-    const baseViews = 573;
+    const baseViews = 600;
     const growthRate = 2.5;
     const viewsTarget = Math.floor(baseViews + (diffDays * growthRate));
 
