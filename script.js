@@ -41,7 +41,7 @@ if (themeBtn) {
 
 // Video Slider Data
 const videos = [
-    { id: 'QOexB8JSU2Q', title: 'QUIET CHASE.', category: 'VISUALS' },
+    { id: 'QOexB8JSU2Q', title: 'QUIET CHASE.', category: 'LOFI' },
     { id: '4YniDV6ryFQ', title: 'FUNK DE TAH TAH TAH', category: 'BRAZILIAN PHONK' },
     { id: 'hFrG3wJ5uvo', title: 'DARK PASTS.', category: 'FILM PROJECT' },
     { id: '8v3s2oZ-Myc', title: 'IGNITION.', category: 'CINEMATIC AUDIO' },
@@ -142,7 +142,7 @@ function updateStats() {
 
     // Calculate values
     const subTarget = 23;
-    const baseViews = 605;
+    const baseViews = 630;
     const growthRate = 2.5;
     const viewsTarget = Math.floor(baseViews + (diffDays * growthRate));
 
@@ -236,6 +236,7 @@ const searchInput = document.getElementById('music-search');
 const searchResults = document.getElementById('search-results');
 
 const allWorks = [
+    { title: "Quiet Chase.", id: "QOexB8JSU2Q", img: "quiet-chase.webp" },
     { title: "FUNK DE TAH TAH TAH", id: "4YniDV6ryFQ", img: "funk-de-tah-tah-tah.webp" },
     { title: "Dark Pasts.", id: "hFrG3wJ5uvo", img: "dark-pasts.webp" },
     { title: "Ignition.", id: "8v3s2oZ-Myc", img: "ignition.webp" },
