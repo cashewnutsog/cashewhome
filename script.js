@@ -41,6 +41,7 @@ if (themeBtn) {
 
 // Video Slider Data
 const videos = [
+    { id: 'QOexB8JSU2Q', title: 'QUIET CHASE.', category: 'VISUALS' },
     { id: '4YniDV6ryFQ', title: 'FUNK DE TAH TAH TAH', category: 'BRAZILIAN PHONK' },
     { id: 'hFrG3wJ5uvo', title: 'DARK PASTS.', category: 'FILM PROJECT' },
     { id: '8v3s2oZ-Myc', title: 'IGNITION.', category: 'CINEMATIC AUDIO' },
