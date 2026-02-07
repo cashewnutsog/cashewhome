@@ -142,7 +142,7 @@ function updateStats() {
 
     // Calculate values
     const subTarget = 23;
-    const baseViews = 630;
+    const baseViews = 660;
     const growthRate = 2.5;
     const viewsTarget = Math.floor(baseViews + (diffDays * growthRate));
 
