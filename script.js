@@ -41,15 +41,15 @@ if (themeBtn) {
 
 // Video Slider Data
 const videos = [
-    { id: 'ikBKo8DqiFo', title: 'SERENITY.', category: 'LOFI PHONK' },
-    { id: 'XQxIrALF79s', title: 'SUSTAINMENT,', category: 'ENERGETIC MOTIVATIONAL' },
-    { id: '60NgjyN1CpU', title: 'ENTRANCE (A)', category: 'EXTREME RHYTHM' },
-    { id: 'H8WismzmucM', title: 'ENTRANCE (B)', category: 'SLOW DRIVING' },
-    { id: 'iWr1nApKbhc', title: 'WHELMING', category: 'CHILL, LIGHT' },
-    { id: '8v3s2oZ-Myc', title: 'IGNITION', category: 'QUIRKY, UPBEAT' },
-    { id: 'hFrG3wJ5uvo', title: 'DARK PASTS', category: 'EMOTIONAL, LAZY' },
+    { id: 'QOexB8JSU2Q', title: 'QUIET CHASE', category: 'DANCE, DRUM' },
     { id: '4YniDV6ryFQ', title: 'TAH TAH TAH', category: 'BRAZILIAN PHONK' },
-    { id: 'QOexB8JSU2Q', title: 'QUIET CHASE', category: 'DANCE, DRUM' }
+    { id: 'hFrG3wJ5uvo', title: 'DARK PASTS', category: 'EMOTIONAL, LAZY' },
+    { id: '8v3s2oZ-Myc', title: 'IGNITION', category: 'QUIRKY, UPBEAT' },
+    { id: 'iWr1nApKbhc', title: 'WHELMING', category: 'CHILL, LIGHT' },
+    { id: 'H8WismzmucM', title: 'ENTRANCE (B)', category: 'SLOW DRIVING' },
+    { id: '60NgjyN1CpU', title: 'ENTRANCE (A)', category: 'EXTREME RHYTHM' },
+    { id: 'XQxIrALF79s', title: 'SUSTAINMENT,', category: 'ENERGETIC MOTIVATIONAL' },
+    { id: 'ikBKo8DqiFo', title: 'SERENITY.', category: 'LOFI PHONK' }
 ];
 
 let currentVideoIndex = 0;
