@@ -237,7 +237,7 @@ body.preloader-active {
     --bg-color: #0a0a0a;
     --text-color: #ffffff;
     --accent-color: #f0f0f0;
-    --muted-color: #888888;
+    --muted-color: #b0b0b0;
     --card-bg: #111111;
     --border-color: #333333;
 }
@@ -570,23 +570,38 @@ nav {
 
 /* About Section */
 .about-section {
-    text-align: center;
-    max-width: 800px;
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 100px 5%;
+    padding: 80px 5%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    align-items: start;
+    position: relative;
 }
 
 .about-label {
-    font-family: 'Antonio', sans-serif;
-    letter-spacing: 4px;
-    font-size: 0.8rem;
-    margin-bottom: 2rem;
-    display: block;
+    font-family: 'Antonio', sans-serif !important;
+    font-weight: 700;
+    letter-spacing: -4px;
+    font-size: 4rem;
+    line-height: 0.8;
+    color: #fff;
+    text-transform: uppercase;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.about-label span {
+    font-family: 'Antonio', sans-serif !important;
 }
 
 .about-text {
-    font-size: 2rem;
-    line-height: 1.4;
+    font-size: 1.2rem;
+    line-height: 1.6;
     font-weight: 300;
     color: var(--muted-color);
     transition: color 0.5s ease;
@@ -594,17 +609,23 @@ nav {
 
 .about-text span {
     color: var(--text-color);
+    font-weight: 600;
 }
 
 /* Milestones */
 .milestones {
     display: flex;
-    justify-content: space-around;
-    padding: 50px 10%;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 3rem;
+    padding: 40px 0;
     border-top: 1px solid var(--border-color);
-    border-bottom: 1px solid var(--border-color);
-    margin-top: 50px;
+    margin-top: 3rem;
     transition: border-color 0.5s ease;
+}
+
+.milestone-item {
+    text-align: center;
 }
 
 .milestone-item h4 {
@@ -612,15 +633,121 @@ nav {
     font-size: 3.5rem;
     line-height: 1;
     letter-spacing: -2px;
+    margin-bottom: 0.5rem;
 }
 
 .milestone-item p {
     font-size: 0.7rem;
     color: var(--muted-color);
     text-transform: uppercase;
-    letter-spacing: 3px;
-    margin-top: 1rem;
-    font-weight: 300;
+    letter-spacing: 2px;
+    font-weight: 400;
+}
+
+/* Desktop Grid Layout */
+@media (min-width: 900px) {
+    .about-section {
+        padding: 150px 5%;
+        grid-template-columns: 350px 1fr;
+        gap: 6rem;
+        text-align: left;
+    }
+
+    .about-label {
+        text-align: center;
+        font-size: 6rem;
+        /* Smaller than the 8rem hero title */
+        letter-spacing: -4px;
+        position: sticky;
+        top: 150px;
+        line-height: 0.8;
+        grid-column: 1;
+    }
+
+    .about-text {
+        grid-column: 2;
+        font-size: 2rem;
+        line-height: 1.4;
+    }
+
+    .milestones {
+        grid-column: 2;
+        width: 100%;
+        justify-content: center;
+        gap: 5rem;
+    }
+
+    .milestone-item h4 {
+        font-size: 5rem;
+    }
+}
+
+/* Mobile Adjustments */
+@media (max-width: 899px) {
+    .about-section {
+        text-align: center;
+        gap: 2rem;
+        padding: 80px 5%;
+    }
+
+    .about-label {
+        font-size: 3.5rem;
+        /* Scaled for mobile */
+        letter-spacing: -2px;
+        text-align: center;
+    }
+
+    .about-text {
+        font-size: 1.1rem;
+        line-height: 1.5;
+    }
+
+    .milestones {
+        justify-content: center;
+        gap: 2rem;
+        flex-direction: row;
+        /* Keep row unless very narrow */
+        border-top: 1px solid var(--border-color);
+        margin-top: 2rem;
+    }
+
+    .video-showcase {
+        padding: 40px 5%;
+    }
+
+    .video-info {
+        max-width: 100%;
+        text-align: center;
+        padding-left: 0;
+        margin-bottom: 2rem;
+    }
+
+    .video-player-container {
+        width: 100%;
+    }
+
+    .nav-arrow {
+        width: 40px;
+        height: 40px;
+        background: rgba(0, 0, 0, 0.7);
+    }
+
+    .nav-arrow.left {
+        left: 5px;
+    }
+
+    .nav-arrow.right {
+        right: 5px;
+    }
+
+    .video-footer {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        text-align: center;
+        font-size: 0.8rem;
+    }
 }
 
 /* Gallery */
@@ -677,7 +804,7 @@ nav {
 /* Video Section */
 .video-showcase {
     width: 100%;
-    padding: 100px 5%;
+    padding: 40px 5%;
     background: #050505;
     position: relative;
     will-change: transform;
@@ -776,7 +903,7 @@ nav {
     margin: 2rem auto 0;
     display: flex;
     justify-content: space-between;
-    font-size: 0.6rem;
+    font-size: 0.9rem;
     color: var(--muted-color);
     letter-spacing: 2px;
 }
@@ -1050,11 +1177,11 @@ footer {
     }
 
     .nav-arrow.left {
-        left: 10px;
+        left: 5px;
     }
 
     .nav-arrow.right {
-        right: 10px;
+        right: 5px;
     }
 
     .footer-main {

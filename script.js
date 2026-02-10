@@ -41,15 +41,15 @@ if (themeBtn) {
 
 // Video Slider Data
 const videos = [
-    { id: 'QOexB8JSU2Q', title: 'QUIET CHASE.', category: 'LOFI' },
-    { id: '4YniDV6ryFQ', title: 'FUNK DE TAH TAH TAH', category: 'BRAZILIAN PHONK' },
-    { id: 'hFrG3wJ5uvo', title: 'DARK PASTS.', category: 'FILM PROJECT' },
-    { id: '8v3s2oZ-Myc', title: 'IGNITION.', category: 'CINEMATIC AUDIO' },
-    { id: 'iWr1nApKbhc', title: 'WHELMING.', category: 'SOUNDSCAPE' },
-    { id: 'H8WismzmucM', title: 'ENTRANCE. (SIDE B)', category: 'MUSICAL JOURNEY' },
-    { id: '60NgjyN1CpU', title: 'ENTRANCE. (SIDE A)', category: 'MUSICAL JOURNEY' },
-    { id: 'XQxIrALF79s', title: 'SUSTAINMENT.', category: 'AUDIO VISUAL' },
-    { id: 'ikBKo8DqiFo', title: 'SERENITY.', category: 'AMBIENT LOFI' }
+    { id: 'ikBKo8DqiFo', title: 'SERENITY.', category: 'LOFI PHONK' },
+    { id: 'XQxIrALF79s', title: 'SUSTAINMENT,', category: 'ENERGETIC MOTIVATIONAL' },
+    { id: '60NgjyN1CpU', title: 'ENTRANCE (A)', category: 'EXTREME RHYTHM' },
+    { id: 'H8WismzmucM', title: 'ENTRANCE (B)', category: 'SLOW DRIVING' },
+    { id: 'iWr1nApKbhc', title: 'WHELMING', category: 'CHILL, LIGHT' },
+    { id: '8v3s2oZ-Myc', title: 'IGNITION', category: 'QUIRKY, UPBEAT' },
+    { id: 'hFrG3wJ5uvo', title: 'DARK PASTS', category: 'EMOTIONAL, LAZY' },
+    { id: '4YniDV6ryFQ', title: 'TAH TAH TAH', category: 'BRAZILIAN PHONK' },
+    { id: 'QOexB8JSU2Q', title: 'QUIET CHASE', category: 'DANCE, DRUM' }
 ];
 
 let currentVideoIndex = 0;
@@ -57,7 +57,7 @@ let currentVideoIndex = 0;
 function updateVideo(index) {
     const video = videos[index];
     document.getElementById('main-video-frame').src = `https://www.youtube.com/embed/${video.id}`;
-    document.getElementById('video-title').innerText = `${video.title} / ${video.category}`;
+    document.getElementById('video-title').innerText = `${video.title} / ${video.category}`.toUpperCase();
     document.getElementById('video-count').innerText = `PROJECT ${String(index + 1).padStart(3, '0')} / ${String(videos.length).padStart(3, '0')}`;
 }
 
