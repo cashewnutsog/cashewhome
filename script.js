@@ -78,8 +78,18 @@ document.getElementById('next-video').addEventListener('click', () => {
 
 // 1. Release Countdown (Every Saturday at 5:30 PM)
 
-function getNextSaturdayTarget() {
+function getNextReleaseTarget() {
     const now = new Date();
+
+    // Special exception: After Saturday Feb 14th release, next release is Sunday Feb 15th
+    const sat14th = new Date(2026, 1, 14, 17, 30, 0).getTime();
+    const sun15th = new Date(2026, 1, 15, 17, 30, 0).getTime();
+
+    if (now.getTime() > sat14th && now.getTime() <= sun15th) {
+        return sun15th;
+    }
+
+    // Usual logic: Next Saturday at 5:30 PM
     const target = new Date();
     target.setHours(17, 30, 0, 0);
     const day = now.getDay();
@@ -91,12 +101,12 @@ function getNextSaturdayTarget() {
     return target.getTime();
 }
 
-let targetDate = getNextSaturdayTarget();
+let targetDate = getNextReleaseTarget();
 function updateCountdown() {
     const now = new Date().getTime();
     let distance = targetDate - now;
     if (distance < 0) {
-        targetDate = getNextSaturdayTarget();
+        targetDate = getNextReleaseTarget();
         distance = targetDate - now;
     }
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
