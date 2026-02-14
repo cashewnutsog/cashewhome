@@ -68,7 +68,7 @@ if (menuTrigger && mobileMenu) {
 // Video Slider Data
 const videos = [
     { id: 'QOexB8JSU2Q', title: 'QUIET CHASE', category: 'DANCE, DRUM' },
-    { id: '4YniDV6ryFQ', title: 'TAH TAH TAH', category: 'BRAZILIAN PHONK' },
+    { id: '4YniDV6ryFQ', title: 'TAH TAH TAH', category: 'FUNK BRAZILIAN PHONK' },
     { id: 'hFrG3wJ5uvo', title: 'DARK PASTS', category: 'EMOTIONAL, LAZY' },
     { id: '8v3s2oZ-Myc', title: 'IGNITION', category: 'QUIRKY, UPBEAT' },
     { id: 'iWr1nApKbhc', title: 'WHELMING', category: 'CHILL, LIGHT' },
