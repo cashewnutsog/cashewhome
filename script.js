@@ -67,6 +67,7 @@ if (menuTrigger && mobileMenu) {
 
 // Video Slider Data
 const videos = [
+    { id: 'hlA-ra4Fh_U', title: 'Agathokakological', category: 'hiphop' },
     { id: 'QOexB8JSU2Q', title: 'QUIET CHASE', category: 'DANCE, DRUM' },
     { id: '4YniDV6ryFQ', title: 'TAH TAH TAH', category: 'FUNK BRAZILIAN PHONK' },
     { id: 'hFrG3wJ5uvo', title: 'DARK PASTS', category: 'EMOTIONAL, LAZY' },
@@ -272,6 +273,7 @@ const searchInput = document.getElementById('music-search');
 const searchResults = document.getElementById('search-results');
 
 const allWorks = [
+    { title: "Agathokakological.", id: "hlA-ra4Fh_U", img: "" },
     { title: "Quiet Chase.", id: "QOexB8JSU2Q", img: "quiet-chase.webp" },
     { title: "FUNK DE TAH TAH TAH", id: "4YniDV6ryFQ", img: "funk-de-tah-tah-tah.webp" },
     { title: "Dark Pasts.", id: "hFrG3wJ5uvo", img: "dark-pasts.webp" },
