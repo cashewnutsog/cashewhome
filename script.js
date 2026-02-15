@@ -109,22 +109,16 @@ document.getElementById('next-video').addEventListener('click', () => {
 function getNextReleaseTarget() {
     const now = new Date();
 
-    // Special exception: After Saturday Feb 14th release, next release is Sunday Feb 15th
-    const sat14th = new Date(2026, 1, 14, 17, 30, 0).getTime();
-    const sun15th = new Date(2026, 1, 15, 17, 30, 0).getTime();
-
-    if (now.getTime() > sat14th && now.getTime() <= sun15th) {
-        return sun15th;
-    }
-
-    // Usual logic: Next Saturday at 5:30 PM
+    // Target: Next Saturday at 5:30 PM
     const target = new Date();
     target.setHours(17, 30, 0, 0);
     const day = now.getDay();
     let daysUntilSaturday = (6 - day + 7) % 7;
+
     if (daysUntilSaturday === 0 && now.getTime() >= target.getTime()) {
         daysUntilSaturday = 7;
     }
+
     target.setDate(now.getDate() + daysUntilSaturday);
     return target.getTime();
 }
@@ -136,6 +130,7 @@ function updateCountdown() {
     if (distance < 0) {
         targetDate = getNextReleaseTarget();
         distance = targetDate - now;
+        updateStats(); // Trigger stats refresh when release happens
     }
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -184,8 +179,8 @@ function updateStats() {
     const growthRate = 2.5;
     const viewsTarget = Math.floor(baseViews + (diffDays * growthRate));
 
-    const baseVideos = 7;
-    const startSaturday = new Date('January 31, 2026 17:30:00').getTime();
+    const baseVideos = 11;
+    const startSaturday = new Date('February 21, 2026 17:30:00').getTime();
     let extraVideos = 0;
     if (now >= startSaturday) {
         extraVideos = Math.floor((now - startSaturday) / (1000 * 60 * 60 * 24 * 7)) + 1;
