@@ -722,6 +722,12 @@ nav {
         margin-bottom: 2rem;
     }
 
+    .video-info p {
+        width: 100%;
+        max-width: 100%;
+        text-align: center;
+    }
+
     .video-player-container {
         width: 100%;
     }
@@ -1196,6 +1202,19 @@ footer {
         flex-direction: column;
         gap: 3rem;
         text-align: center;
+        align-items: center;
+    }
+
+    .footer-minor-details {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        width: 100%;
+    }
+
+    .footer-minor-details p {
+        width: 100%;
     }
 
     .footer-brand h2 {

@@ -67,10 +67,10 @@ if (menuTrigger && mobileMenu) {
 
 // Video Slider Data
 const videos = [
-    { id: 'wItT37E6Zm8', title: 'Agathokakological (Side B)', category: 'dark ambient' },
-    { id: 'hlA-ra4Fh_U', title: 'Agathokakological (Side A)', category: 'hiphop' },
+    { id: 'wItT37E6Zm8', title: 'Agathokakological. (Side B)', category: 'dark ambient' },
+    { id: 'hlA-ra4Fh_U', title: 'Agathokakological. (Side A)', category: 'hiphop' },
     { id: 'QOexB8JSU2Q', title: 'QUIET CHASE', category: 'DANCE, DRUM' },
-    { id: '4YniDV6ryFQ', title: 'TAH TAH TAH', category: 'FUNK BRAZILIAN PHONK' },
+    { id: '4YniDV6ryFQ', title: 'FUNK DE TAH TAH TAH', category: 'BRAZILIAN PHONK' },
     { id: 'hFrG3wJ5uvo', title: 'DARK PASTS', category: 'EMOTIONAL, LAZY' },
     { id: '8v3s2oZ-Myc', title: 'IGNITION', category: 'QUIRKY, UPBEAT' },
     { id: 'iWr1nApKbhc', title: 'WHELMING', category: 'CHILL, LIGHT' },
@@ -85,7 +85,7 @@ let currentVideoIndex = 0;
 function updateVideo(index) {
     const video = videos[index];
     document.getElementById('main-video-frame').src = `https://www.youtube.com/embed/${video.id}?rel=0`;
-    document.getElementById('video-title').innerText = `${video.title}/ ${video.category}`;
+    document.getElementById('video-title').innerText = `${video.title}/ ${video.category}`.toUpperCase();
     document.getElementById('video-count').innerText = `PROJECT ${String(index + 1).padStart(3, '0')} / ${String(videos.length).padStart(3, '0')}`;
 }
 
@@ -274,8 +274,8 @@ const searchInput = document.getElementById('music-search');
 const searchResults = document.getElementById('search-results');
 
 const allWorks = [
-    { title: "Agathokakological (Side B)", id: "wItT37E6Zm8", img: "" },
-    { title: "Agathokakological.", id: "hlA-ra4Fh_U", img: "" },
+    { title: "Agathokakological. (Side B)", id: "wItT37E6Zm8", img: "" },
+    { title: "Agathokakological. (Side A)", id: "hlA-ra4Fh_U", img: "" },
     { title: "Quiet Chase.", id: "QOexB8JSU2Q", img: "quiet-chase.webp" },
     { title: "FUNK DE TAH TAH TAH", id: "4YniDV6ryFQ", img: "funk-de-tah-tah-tah.webp" },
     { title: "Dark Pasts.", id: "hFrG3wJ5uvo", img: "dark-pasts.webp" },
