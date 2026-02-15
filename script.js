@@ -70,6 +70,7 @@ const videos = [
     { id: 'hlA-ra4Fh_U', title: 'Agathokakological', category: 'hiphop' },
     { id: 'QOexB8JSU2Q', title: 'QUIET CHASE', category: 'DANCE, DRUM' },
     { id: '4YniDV6ryFQ', title: 'TAH TAH TAH', category: 'FUNK BRAZILIAN PHONK' },
+    { id: 'wItT37E6Zm8', title: 'AGATHOKAKOLOGICAL (SIDE B)', category: 'DARK AMBIENT' },
     { id: 'hFrG3wJ5uvo', title: 'DARK PASTS', category: 'EMOTIONAL, LAZY' },
     { id: '8v3s2oZ-Myc', title: 'IGNITION', category: 'QUIRKY, UPBEAT' },
     { id: 'iWr1nApKbhc', title: 'WHELMING', category: 'CHILL, LIGHT' },
@@ -275,6 +276,7 @@ const searchResults = document.getElementById('search-results');
 const allWorks = [
     { title: "Agathokakological.", id: "hlA-ra4Fh_U", img: "" },
     { title: "Quiet Chase.", id: "QOexB8JSU2Q", img: "quiet-chase.webp" },
+    { title: "Agathokakological (Side B)", id: "wItT37E6Zm8", img: "" },
     { title: "FUNK DE TAH TAH TAH", id: "4YniDV6ryFQ", img: "funk-de-tah-tah-tah.webp" },
     { title: "Dark Pasts.", id: "hFrG3wJ5uvo", img: "dark-pasts.webp" },
     { title: "Ignition.", id: "8v3s2oZ-Myc", img: "ignition.webp" },
