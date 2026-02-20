@@ -216,7 +216,7 @@ updateStats();
 
 // 1. Preloader and Video Sync Logic
 let preloaderStartTime = Date.now();
-const MIN_PRELOADER_TIME = 4000; // 4 seconds = 2 full cycles of the 2s animation
+const MIN_PRELOADER_TIME = 1200; // Reduced from 4000 to 1200ms
 
 function removePreloader() {
     const preloader = document.getElementById('preloader');
@@ -231,7 +231,7 @@ function removePreloader() {
         setTimeout(() => {
             preloader.style.visibility = 'hidden';
             document.body.classList.remove('preloader-active');
-        }, 2000); // Match CSS transition duration
+        }, 1000); // reduced from 2000 to match CSS transition
     }, remainingTime);
 }
 
@@ -319,7 +319,7 @@ function createWorkCard(work) {
     const card = document.createElement('div');
     card.className = 'work-card';
     const imgHtml = work.img
-        ? `<img src="${work.img}" alt="${work.title}" class="work-img">`
+        ? `<img src="${work.img}" alt="${work.title}" class="work-img" loading="lazy" decoding="async">`
         : `<div class="hero-img-placeholder">PREVIEW UNAVAILABLE</div>`;
 
     card.innerHTML = `
