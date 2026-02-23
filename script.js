@@ -269,7 +269,6 @@ const searchInput = document.getElementById('music-search');
 const searchResults = document.getElementById('search-results');
 
 const allWorks = [
-    { title: "Agathokakological. (Side B)", id: "wItT37E6Zm8", img: "side-b.jpg" },
     { title: "Agathokakological. (Side A)", id: "hlA-ra4Fh_U", img: "side-a.jpg" },
     { title: "Quiet Chase.", id: "QOexB8JSU2Q", img: "quiet-chase.webp" },
     { title: "FUNK DE TAH TAH TAH", id: "4YniDV6ryFQ", img: "funk-de-tah-tah-tah.webp" },
