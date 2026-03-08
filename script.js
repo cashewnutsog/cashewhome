@@ -182,8 +182,8 @@ function updateStats() {
     const growthRate = 2.5;
     const viewsTarget = Math.floor(baseViews + (diffDays * growthRate));
 
-    const baseVideos = 15;
-    const startSaturday = new Date('February 21, 2026 17:30:00').getTime();
+    const baseVideos = 14;
+    const startSaturday = new Date('March 14, 2026 17:30:00').getTime();
     let extraVideos = 0;
     if (now >= startSaturday) {
         extraVideos = Math.floor((now - startSaturday) / (1000 * 60 * 60 * 24 * 7)) + 1;
