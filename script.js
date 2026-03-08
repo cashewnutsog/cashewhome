@@ -67,6 +67,8 @@ if (menuTrigger && mobileMenu) {
 
 // Video Slider Data
 const videos = [
+    { id: 'HiXmtEVnWt8', title: 'Anagnorisis.', category: 'Chaotic Phonk' },
+    { id: 'vJHsjimL_tc', title: 'Rainy Days.', category: 'LOFI, AMBIENT' },
     { id: 'd5ZTDFs_tuQ', title: 'Just Breathe.', category: 'RELAXING' },
     { id: 'wItT37E6Zm8', title: 'Agathokakological. (Side B)', category: 'dark ambient' },
     { id: 'hlA-ra4Fh_U', title: 'Agathokakological. (Side A)', category: 'hiphop' },
@@ -176,11 +178,11 @@ function updateStats() {
 
     // Calculate values
     const subTarget = 23;
-    const baseViews = 930;
+    const baseViews = 1110;
     const growthRate = 2.5;
     const viewsTarget = Math.floor(baseViews + (diffDays * growthRate));
 
-    const baseVideos = 12;
+    const baseVideos = 15;
     const startSaturday = new Date('February 21, 2026 17:30:00').getTime();
     let extraVideos = 0;
     if (now >= startSaturday) {
@@ -270,7 +272,10 @@ const searchInput = document.getElementById('music-search');
 const searchResults = document.getElementById('search-results');
 
 const allWorks = [
-    { title: "Just Breathe.", id: "d5ZTDFs_tuQ", img: "" },
+    { title: "Anagnorisis.", id: "HiXmtEVnWt8", img: "Anagnorisis.png" },
+    { title: "Rainy Days.", id: "vJHsjimL_tc", img: "Rainy Days.png" },
+    { title: "Just Breathe.", id: "d5ZTDFs_tuQ", img: "Just Breathe.png" },
+    { title: "Agathokakological. (Side B)", id: "wItT37E6Zm8", img: "side-b.jpg" },
     { title: "Agathokakological. (Side A)", id: "hlA-ra4Fh_U", img: "side-a.jpg" },
     { title: "Quiet Chase.", id: "QOexB8JSU2Q", img: "quiet-chase.webp" },
     { title: "FUNK DE TAH TAH TAH", id: "4YniDV6ryFQ", img: "funk-de-tah-tah-tah.webp" },
