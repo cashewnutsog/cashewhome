@@ -274,8 +274,8 @@ const searchResults = document.getElementById('search-results');
 const allWorks = [
     { title: "Anagnorisis.", id: "HiXmtEVnWt8", img: "Anagnorisis.jpg" },
     { title: "Rainy Days.", id: "vJHsjimL_tc", img: "Rainy Days.png" },
-    { title: "Agathokakological. (Side B)", id: "wItT37E6Zm8", img: "side-b.jpg" },
     { title: "Just Breathe.", id: "d5ZTDFs_tuQ", img: "Just Breathe.png" },
+    { title: "Agathokakological. (Side B)", id: "wItT37E6Zm8", img: "side-b.jpg" },
     { title: "Agathokakological. (Side A)", id: "hlA-ra4Fh_U", img: "side-a.jpg" },
     { title: "Quiet Chase.", id: "QOexB8JSU2Q", img: "quiet-chase.webp" },
     { title: "FUNK DE TAH TAH TAH", id: "4YniDV6ryFQ", img: "funk-de-tah-tah-tah.webp" },
