@@ -161,7 +161,7 @@ function animateValue(id, start, end, duration) {
         if (!startTimestamp) startTimestamp = timestamp;
         const progress = Math.min((timestamp - startTimestamp) / duration, 1);
         const current = Math.floor(progress * (endValue - start) + start);
-        obj.innerText = current.toLocaleString() + (hasPlus && current === endValue ? "+" : "");
+        obj.innerText = (id === 'stat-views' ? current : current.toLocaleString()) + (hasPlus && current === endValue ? "+" : "");
         if (progress < 1) {
             window.requestAnimationFrame(step);
         }
@@ -172,7 +172,7 @@ function animateValue(id, start, end, duration) {
 let statsAnimated = false;
 
 function updateStats() {
-    const startDate = new Date('February 13, 2026 00:00:00').getTime();
+    const startDate = new Date('March 08, 2026 00:00:00').getTime();
     const now = new Date().getTime();
     const diffDays = Math.floor((now - startDate) / (1000 * 60 * 60 * 24));
 
@@ -208,7 +208,7 @@ function updateStats() {
     } else {
         // Regular update if already animated
         document.getElementById('stat-subscribers').innerText = subTarget.toString();
-        document.getElementById('stat-views').innerText = viewsTarget.toLocaleString();
+        document.getElementById('stat-views').innerText = viewsTarget.toString();
         document.getElementById('stat-videos').innerText = videosTarget.toString();
     }
 }
