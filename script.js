@@ -272,20 +272,19 @@ const searchInput = document.getElementById('music-search');
 const searchResults = document.getElementById('search-results');
 
 const allWorks = [
-    { title: "Anagnorisis.", id: "HiXmtEVnWt8", img: "Anagnorisis.jpg" },
-    { title: "Rainy Days.", id: "vJHsjimL_tc", img: "Rainy Days.png" },
-    { title: "Just Breathe.", id: "d5ZTDFs_tuQ", img: "Just Breathe.png" },
-    { title: "Agathokakological. (Side B)", id: "wItT37E6Zm8", img: "side-b.jpg" },
-    { title: "Agathokakological. (Side A)", id: "hlA-ra4Fh_U", img: "side-a.jpg" },
-    { title: "Quiet Chase.", id: "QOexB8JSU2Q", img: "quiet-chase.webp" },
-    { title: "FUNK DE TAH TAH TAH", id: "4YniDV6ryFQ", img: "funk-de-tah-tah-tah.webp" },
-    { title: "Dark Pasts.", id: "hFrG3wJ5uvo", img: "dark-pasts.webp" },
-    { title: "Ignition.", id: "8v3s2oZ-Myc", img: "ignition.webp" },
-    { title: "Whelming.", id: "iWr1nApKbhc", img: "whelming.webp" },
-    { title: "Entrance (Side B).", id: "H8WismzmucM", img: "entrance-b.webp" },
-    { title: "Entrance (Side A).", id: "60NgjyN1CpU", img: "entrance-a.webp" },
-    { title: "Sustainment.", id: "XQxIrALF79s", img: "sustainment.webp" },
-    { title: "Serenity.", id: "ikBKo8DqiFo", img: "serenity.webp" }
+    { title: "Dark Pasts", img: "https://i.ibb.co/F4QhMTRB/dark-pasts.webp" },
+    { title: "Entrance A", img: "https://i.ibb.co/7x1czjQ2/entrance-a.webp" },
+    { title: "Entrance B", img: "https://i.ibb.co/gLZSVg1y/entrance-b.webp" },
+    { title: "Funk de Tah Tah Tah", img: "https://i.ibb.co/nMJdh3sK/funk-de-tah-tah-tah.webp" },
+    { title: "Ignition", img: "https://i.ibb.co/SDHHD1w5/ignition.webp" },
+    { title: "Just Breathe", img: "https://i.ibb.co/DjFYt4d/Just-Breathe.png" },
+    { title: "Quiet Chase", img: "https://i.ibb.co/ds2Qyxtv/quiet-chase.webp" },
+    { title: "Rainy Days", img: "https://i.ibb.co/27NZ2xCC/Rainy-Days.png" },
+    { title: "Serenity", img: "https://i.ibb.co/VpLX4sGB/serenity.webp" },
+    { title: "Side A", img: "https://i.ibb.co/604ZGYHD/side-a.jpg" },
+    { title: "Side B", img: "https://i.ibb.co/35Jc9cF7/side-b.jpg" },
+    { title: "Sustainment", img: "https://i.ibb.co/Z1Tnj958/sustainment.webp" },
+    { title: "Whelming", img: "https://i.ibb.co/MDb0KxFM/whelming.webp" }
 ];
 
 // Refactored Modal System
@@ -339,14 +338,41 @@ function createWorkCard(work) {
 }
 
 function populateMainWorks() {
-    const mainWorksGrid = document.getElementById('main-works-grid');
-    if (!mainWorksGrid) return;
+    const mainWorksScene = document.getElementById('main-works-scene');
+    if (!mainWorksScene) return;
 
-    mainWorksGrid.innerHTML = '';
-    // Show only the first 4 latest works
-    allWorks.slice(0, 4).forEach(work => {
-        mainWorksGrid.appendChild(createWorkCard(work));
+    mainWorksScene.innerHTML = '';
+    
+    // Set the total number of items (--n) on the scene wrapper
+    mainWorksScene.style.setProperty('--n', allWorks.length);
+
+    const a3d = document.createElement('div');
+    a3d.className = 'a3d';
+
+    // Base card width in pixels (17.5em * 16px roughly, or just use a fixed px for calc)
+    // To match CSS: var(--w) is 17.5em. Let's assume 1em = 16px.
+    const wEms = 17.5;
+    const paddingEms = 0.5;
+    
+    allWorks.forEach((work, index) => {
+        const img = document.createElement('img');
+        img.className = 'card';
+        img.src = work.img;
+        img.alt = work.title;
+        img.loading = 'lazy';
+        img.decoding = 'async';
+
+        // Calculate translateZ in JS instead of CSS tan()
+        const ba = (2 * Math.PI) / allWorks.length; // base angle in radians
+        const translateZ = -1 * ((0.5 * wEms + paddingEms) / Math.tan(0.5 * ba));
+
+        img.style.setProperty('--i', index);
+        img.style.setProperty('--tz', `${translateZ}em`);
+
+        a3d.appendChild(img);
     });
+
+    mainWorksScene.appendChild(a3d);
 }
 
 function populateWorksGallery() {

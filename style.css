@@ -394,6 +394,7 @@ nav {
 .nav-subscribe-link i {
     font-size: 2.2rem !important;
     opacity: 1 !important;
+    transition: transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28), opacity 0.3s;
 }
 
 .nav-subscribe-link span {
@@ -402,6 +403,36 @@ nav {
     letter-spacing: 1px;
     font-weight: 800;
     margin-top: -5px;
+    transition: opacity 0.3s;
+}
+
+/* YouTube Nav Hover Modification */
+.youtube-nav-hover {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    justify-content: center;
+}
+
+.youtube-nav-hover .subscribe-text {
+    position: absolute;
+    opacity: 0;
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    transform: translateY(10px);
+    transition: all 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    pointer-events: none;
+}
+
+.youtube-nav-hover:hover i {
+    opacity: 0 !important;
+    transform: scale(0.5);
+}
+
+.youtube-nav-hover:hover .subscribe-text {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .hero {
@@ -599,6 +630,68 @@ nav {
     text-decoration: none;
     font-size: 0.7rem;
     text-transform: uppercase;
+}
+
+/* 3D Rotating Carousel */
+.carousel-wrapper {
+    width: 100%;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    /* Prevent interference with other sections */
+}
+
+.scene, .a3d { 
+    display: grid;
+}
+
+.scene {
+    overflow: visible;
+    perspective: 35em;
+    mask: linear-gradient(90deg, #0000, red 20% 80%, #0000);
+    -webkit-mask: linear-gradient(90deg, #0000, red 20% 80%, #0000);
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.a3d {
+    place-self: center;
+    transform-style: preserve-3d;
+    animation: ry 32s linear infinite;
+}
+
+@keyframes ry { 
+    to { transform: rotateY(1turn); } 
+}
+
+.card {
+    --w: 17.5em; /* Card width */
+    grid-area: 1 / 1;
+    width: var(--w);
+    aspect-ratio: 7 / 10;
+    object-fit: cover;
+    border-radius: 1.5em;
+    backface-visibility: hidden;
+    /* --n is set on .scene wrapper, --i and translateZ are set dynamically via JS */
+    --ba: calc(1turn / var(--n));
+    transform: 
+        rotateY(calc(var(--i) * var(--ba)))
+        translateZ(var(--tz));
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .a3d { animation-duration: 128s; }
+}
+
+/* Update section container for carousel */
+#works.section-container {
+    padding-bottom: 50px;
+    overflow: hidden; /* Ensure 3d elements don't cause horizontal scrollbar on body */
 }
 
 /* About Section */
@@ -818,6 +911,24 @@ nav {
 
 .gallery-item.large {
     grid-column: span 2;
+}
+
+.gallery-item.coming-soon-container {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px dashed rgba(255, 255, 255, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 250px;
+}
+
+.coming-soon-content {
+    font-family: 'Antonio', sans-serif;
+    font-size: 2rem;
+    color: var(--muted-color);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    animation: pulse 3s infinite;
 }
 
 .gallery-overlay {
@@ -1293,6 +1404,10 @@ footer {
     .gallery-item.large {
         grid-column: span 1;
     }
+    
+    .gallery-item.coming-soon-container {
+        min-height: 150px;
+    }
 
     .section-title {
         font-size: 2.2rem;
@@ -1300,6 +1415,14 @@ footer {
 
     .about-text {
         font-size: 1.4rem;
+    }
+    
+    /* Mobile Carousel Adjustments */
+    .carousel-wrapper {
+        height: 350px;
+    }
+    .card {
+        --w: 10em; /* Reduce card width to fit mobile screen */
     }
 }
 
@@ -1385,6 +1508,12 @@ body.light-theme #theme-icon {
     filter: invert(0);
     /* Sun icon should stay normal/golden in light mode */
 }
+
+body.light-theme .gallery-item.coming-soon-container {
+    background: rgba(0, 0, 0, 0.03);
+    border: 1px dashed rgba(0, 0, 0, 0.2);
+}
+
 
 /* Ensure FontAwesome icons and other links are black in light mode, EXCEPT in the nav */
 body.light-theme .social-icons a,
