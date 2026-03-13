@@ -350,9 +350,10 @@ function populateMainWorks() {
     a3d.className = 'a3d';
 
     // Base card width in pixels (17.5em * 16px roughly, or just use a fixed px for calc)
-    // To match CSS: var(--w) is 17.5em. Let's assume 1em = 16px.
-    const wEms = 17.5;
-    const paddingEms = 0.5;
+    // To match CSS: var(--w) is 17.5em. On mobile, use a smaller value to bring cards closer.
+    const isMobile = window.innerWidth <= 768;
+    const wEms = isMobile ? 9 : 17.5;
+    const paddingEms = isMobile ? 0.3 : 0.5;
     
     allWorks.forEach((work, index) => {
         const img = document.createElement('img');
@@ -368,6 +369,7 @@ function populateMainWorks() {
 
         img.style.setProperty('--i', index);
         img.style.setProperty('--tz', `${translateZ}em`);
+        img.style.setProperty('--w', `${wEms}em`);
 
         a3d.appendChild(img);
     });

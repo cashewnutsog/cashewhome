@@ -694,6 +694,13 @@ nav {
     overflow: hidden; /* Ensure 3d elements don't cause horizontal scrollbar on body */
 }
 
+/* Mobile: bring carousel cards closer together */
+@media (max-width: 768px) {
+    .carousel-wrapper {
+        height: 350px;
+    }
+}
+
 /* About Section */
 .about-section {
     max-width: 1400px;
