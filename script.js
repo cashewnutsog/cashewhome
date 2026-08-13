@@ -109,6 +109,7 @@ document.getElementById('next-video').addEventListener('click', () => {
 
 // 1. Release Countdown (Every Saturday at 5:30 PM)
 
+/*
 function getNextReleaseTarget() {
     const now = new Date();
 
@@ -146,6 +147,7 @@ function updateCountdown() {
     document.getElementById('seconds').innerText = seconds.toString().padStart(2, '0');
 }
 setInterval(updateCountdown, 1000);
+*/
 
 // 2. Dynamic Stats logic
 function animateValue(id, start, end, duration) {
@@ -172,12 +174,16 @@ function animateValue(id, start, end, duration) {
 let statsAnimated = false;
 
 function updateStats() {
+    // Static stat targets
+    const subTarget = 23;
+    const videosTarget = 14;
+    const viewsTarget = 1303;
+
+    /* Logical increment calculation (commented out):
     const startDate = new Date('March 08, 2026 00:00:00').getTime();
     const now = new Date().getTime();
     const diffDays = Math.floor((now - startDate) / (1000 * 60 * 60 * 24));
 
-    // Calculate values
-    const subTarget = 23;
     const baseViews = 1110;
     const growthRate = 2.5;
     const viewsTarget = Math.floor(baseViews + (diffDays * growthRate));
@@ -189,6 +195,7 @@ function updateStats() {
         extraVideos = Math.floor((now - startSaturday) / (1000 * 60 * 60 * 24 * 7)) + 1;
     }
     const videosTarget = baseVideos + extraVideos;
+    */
 
     if (!statsAnimated) {
         // Observer to trigger animation
@@ -212,7 +219,7 @@ function updateStats() {
         document.getElementById('stat-videos').innerText = videosTarget.toString();
     }
 }
-setInterval(updateStats, 60000);
+// setInterval(updateStats, 60000);
 updateStats();
 
 // Theme variables moved to top
